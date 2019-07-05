@@ -1,0 +1,13 @@
+body{
+	padding-top: 110px;
+}
+
+.navbar-inverse .navbar-text{
+	position:absolute;
+	top:10px;
+	left:240px;
+}
+
+.navbar-inverse .navbar-nav{
+	padding-right:50px; 
+}

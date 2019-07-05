@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="/static/bootstrap-3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
+
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <script src="/static/jquery-3.4.1.min.js"></script>
+    <script src="/static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+    <script src="/static/moment-with-locales.js"></script>
+    <script src="/static/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+
+    <script src="/static/js/index.js"></script>
+ 
+    <title>Seaglet激光测风雷达数据共享平台</title>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button class="navbar-toggle" data-toggle="collapse" data-target="#responsive-navbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <img src = "/static/img/seaglet.png" width="240" height = "65">
+                </a>
+            </div>
+        </div>
+
+        <div class="collapse navbar-collapse" id="responsive-navbar">
+            <p class="navbar-text"><b><font size="6">激光测风雷达数据共享平台</font></b></p>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active">
+                    <a href="index.html">首页</a>
+                </li>
+                <li>
+                    <a href="lidar.html">激光雷达</a>
+                </li>
+                <li>
+                    <a href="#">融合产品</a>
+                </li>
+                <li>
+                    <a href="#">T-logP图</a>
+                </li>
+                <li>
+                    <a href="#">统计查询</a>
+                </li>
+                <li>
+                    <a href="#">服务咨询</a>
+                </li>
+                <li>
+                    <a href="#">关于我们</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="container  col-lg-2 col-md-2">
+        <div class = "panel panel-default">
+            <div class="panel-heading">观测设备</div>
+            <div class="panel-body">
+                <div class="list-group" id ="dev-list-group">
+                    <a href="javascript:;" onclick = "search_from_dev('激光雷达');return false" class="list-group-item active">激光雷达</a>
+                    <a href="javascript:;" onclick = "search_from_dev('风廓线雷达');return false" class="list-group-item">风廓线雷达</a>
+                    <a href="javascript:;" onclick = "search_from_dev('微波辐射计');return false" class="list-group-item">微波辐射计</a>
+                    <a href="javascript:;" onclick = "search_from_dev('地面风速计');return false" class="list-group-item">地面风速计</a>
+                </div>
+            </div>
+        </div>
+        <div class = "panel panel-default">
+            <div class="panel-heading">观测高度(m)</div>
+            <div class="panel-body">
+                <div class="list-group" id="height-list-group">
+                    <a href="javascript:;" onclick = "search_from_height('地面');return false" class="list-group-item active">地面</a>
+                    <a href="javascript:;" onclick = "search_from_height('500');return false" class="list-group-item">500</a>
+                    <a href="javascript:;" onclick = "search_from_height('1000');return false" class="list-group-item">1000</a>
+                    <a href="javascript:;" onclick = "search_from_height('1500');return false" class="list-group-item">1500</a>
+                    <a href="javascript:;" onclick = "search_from_height('2000');return false" class="list-group-item">2000</a>
+                    <a href="javascript:;" onclick = "search_from_height('2500');return false" class="list-group-item">2500</a>
+                    <a href="javascript:;" onclick = "search_from_height('3000');return false" class="list-group-item">3000</a>
+                    <a href="javascript:;" onclick = "search_from_height('4000');return false" class="list-group-item">4000</a>
+                    <a href="javascript:;" onclick = "search_from_height('5000');return false" class="list-group-item">5000</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container col-lg-8 col-md-8">
+        <div class="btn-group" role="group" id="city-btn-group">
+			<button type="button" class="btn btn-default active" onclick="search_from_city('思明')">思明</button>
+			<button type="button" class="btn btn-default" onclick="search_from_city('湖里')">湖里</button>
+			<button type="button" class="btn btn-default" onclick="search_from_city('集美')">集美</button>
+			<button type="button" class="btn btn-default" onclick="search_from_city('海沧')">海沧</button>
+			<button type="button" class="btn btn-default" onclick="search_from_city('同安')">同安</button>
+        </div>
+
+        <img  class="img-polaroid" src = "/static/img/demo.png">
+        <h4>说明</h4>
+        <p>本数据使用地面风速计采集，参数为500m高度。</p>
+    </div>
+
+    <div class="container  col-lg-2 col-md-2">
+        <div class = "panel panel-default">
+            <div class="panel-heading">历史查询</div>
+            <div class="panel-body">
+                <form>
+                    <div class="form-group">
+                        <label for="start_date_time">起始时间:</label>
+                        <div class="input-group date" id="datetimepick1">
+                            <input type="text" class="form-control"/>
+                            <span class="input-group-addon"> 
+                                <span class="glyphicon glyphicon-calendar"/>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="start_date_time">结束时间:</label>
+                        <div class="input-group date" id="datetimepick2">
+                            <input type="text" class="form-control"/>
+                            <span class="input-group-addon"> 
+                                <span class="glyphicon glyphicon-calendar"/>
+                            </span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-default">搜索</button>
+                </form>
+            </div>  
+        </div>  
+    </div>
+</body>
+</html>
