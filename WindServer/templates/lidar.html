@@ -75,11 +75,6 @@
                     <div class="panel-body">
                         <div class="list-group" id ="ele-list-group">
                             <label>俯仰角度:</label>
-                            <!--<a href="javascript:;" onclick = "search_ppi_from_ele(0);return false" class="list-group-item active">0&deg</a>
-                            <a href="javascript:;" onclick = "search_ppi_from_ele(3);return false" class="list-group-item">3&deg</a>
-                            <a href="javascript:;" onclick = "search_ppi_from_ele(5);return false" class="list-group-item">5&deg</a>
-                            <a href="javascript:;" onclick = "search_ppi_from_ele(10);return false" class="list-group-item">10&deg</a>
-                            <a href="javascript:;" onclick = "search_ppi_from_ele(20);return false" class="list-group-item">20&deg</a>-->
 							<li class="list-group-item active">0&deg</li>
                             <li class="list-group-item">3&deg</li>
                             <li class="list-group-item">5&deg</li>
@@ -98,17 +93,12 @@
                 </div>
                 <div id="collapseTwo" class="pane-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
                     <div class="panel-body">
-                        <div class="input-group">
-                            <span class="input-group-addon" id="heigh_select">高度:</span>
-                            <div class="input-group-btn">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-describedby="heigh-select">100m<span class="caret"></span></button>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">100m</a></li>
-                                    <li><a href="#">250m</a></li>
-                                    <li><a href="#">500m</a></li>
-                                    <li><a href="#">750m</a></li>
-                                </ul>
-                            </div>
+                        <div class="list-group" id="hei-list-group">
+							<label>高度:</label>
+                            <li class="list-group-item active">100m</li>
+                            <li class="list-group-item">250m</li>
+                            <li class="list-group-item">500m</li>
+                            <li class="list-group-item">750m</li>
                         </div>
                     </div>
                 </div>
@@ -122,26 +112,11 @@
                 </div>
                 <div id="collapseThree" class="pane-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
                     <div class="panel-body">
-                        <div class="input-group">
-                            <span class="input-group-addon" id="time_select">时间选择</span>
-                            <div class="input-group-btn">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-describedby="time_select">0:00<span class="caret"></span></button>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">0:00</a></li>
-                                    <li><a href="#">1:00</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="input-group">
-                            <span class="input-group-addon" id="dis_select">显示要素</span>
-                            <div class="input-group-btn">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-describedby="dis_select">水平风(HWind)<span class="caret"></span></button>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">水平风(HWind)</a></li>
-                                    <li><a href="#">垂直风(ZWind)</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                        <div class="list-group" id="dis-list-group">    
+							<label>显示要素:</label>                          
+                            <li class="list-group-item active">水平风(HWind)</li>
+                            <li class="list-group-item">垂直风(ZWind)</li>
+                    	</div>
                     </div>
                 </div>
             </div>
@@ -154,17 +129,12 @@
                 </div>
                 <div id="collapseFour" class="pane-collapse collapse in" role="tabpanel" aria-labelledby="headingFour">
                     <div class="panel-body">
-                            <div class="input-group">
-                                <span class="input-group-addon" id="azi_select">方位角选择:</span>
-                                <div class="input-group-btn">
-                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-describedby="azi_select">0<span class="caret"></span></button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">0</a></li>
-                                        <li><a href="#">90</a></li>
-                                        <li><a href="#">180</a></li>
-                                    </ul>
-                                </div>
-                            </div>
+                        <div class="list-group" id="azi-list-group">
+							<label>方位角度:</label>
+                            <li class="list-group-item active">0&deg</li>
+                            <li class="list-group-item">90&deg</li>
+                            <li class="list-group-item">180&deg</li>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -181,12 +151,6 @@
             <div class="panel-heading">观测站点</div>
             <div class="panel-body">
                 <div class="btn-group" role="group" id="city-btn-group">
-            		<!--<button type="button" class="btn btn-default active" onclick="search_from_city('全站')">全站</button>
-					<button type="button" class="btn btn-default" onclick="search_from_city('翔安')">翔安</button>
-					<button type="button" class="btn btn-default" onclick="search_from_city('湖里')">湖里</button>
-					<button type="button" class="btn btn-default" onclick="search_from_city('集美')">集美</button>
-					<button type="button" class="btn btn-default" onclick="search_from_city('海沧')">海沧</button>
-					<button type="button" class="btn btn-default" onclick="search_from_city('同安')">同安</button>-->
 					<button type="button" class="btn btn-default active"">全站</button>
 					<button type="button" class="btn btn-default">翔安</button>
 					<button type="button" class="btn btn-default">湖里</button>
@@ -218,7 +182,7 @@
                             </span>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-default">搜索</button>
+                    <button type="button" class="btn btn-default" onclick="search_ppi()">搜索</button>
                 </form>
             </div>  
         </div>  
