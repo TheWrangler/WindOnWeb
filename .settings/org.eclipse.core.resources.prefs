@@ -1,3 +1,5 @@
 eclipse.preferences.version=1
+encoding//WindServer/static/js/lidar.js=UTF-8
 encoding//WindServer/templates/index.html=UTF-8
-encoding//WindServer/templates/lidar.html=UTF-8
+encoding//WindServer/templates/lidar/cappi.html=UTF-8
+encoding//WindServer/templates/lidar/ppi.html=UTF-8

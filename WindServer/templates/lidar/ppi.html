@@ -40,7 +40,7 @@
                     <a href="index.html">首页</a>
                 </li>
                 <li class="active">
-                    <a href="lidar.html">激光雷达</a>
+                    <a href="ppi.html">激光雷达</a>
                 </li>
                 <li>
                     <a href="#">融合产品</a>
@@ -63,79 +63,27 @@
 
 
     <div class="container  col-lg-2 col-md-2">
-        <div class="panel-group" id="accordin" role="tablist" aria-multiselectable="true">
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingOne">
-                    <h4 class="panel-title">
-                        <a role="button" data-toggle="collapse" data-parent="#accordin" href="#collapseOne" aria-expanded="true" aria-controls="collapse">PPI拼图</a>
-                        <span class="glyphicon glyphicon-blackboard"/>
-                    </h4>
+        <div class = "panel panel-default">
+            <div class="panel-heading">产品选择</div>
+            <div class="panel-body">
+                <div class="list-group" id="product-list-group">
+                    <li class="list-group-item active" onclick="load_lidar('PPI拼图')">PPI拼图</li>
+                    <li class="list-group-item" onclick="load_lidar('VOL模式CAPPI')">VOL模式CAPPI</li>
+                    <li class="list-group-item" onclick="load_lidar('风廓线THI')">风廓线THI</li>
+                    <li class="list-group-item" onclick="load_lidar('RHI')">RHI</li>
                 </div>
-                <div id="collapseOne" class="pane-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                    <div class="panel-body">
-                        <div class="list-group" id ="ele-list-group">
-                            <label>俯仰角度:</label>
-							<li class="list-group-item active">0&deg</li>
-                            <li class="list-group-item">3&deg</li>
-                            <li class="list-group-item">5&deg</li>
-                            <li class="list-group-item">10&deg</li>
-                            <li class="list-group-item">20&deg</li>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingTwo">
-                    <h4 class="panel-title">
-                        <a role="button" data-toggle="collapse" data-parent="#accordin" href="#collapseTwo" aria-expanded="true" aria-controls="collapse">VOL模式CAPPI</a>
-                        <span class="glyphicon glyphicon-blackboard"/>
-                    </h4>
-                </div>
-                <div id="collapseTwo" class="pane-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
-                    <div class="panel-body">
-                        <div class="list-group" id="hei-list-group">
-							<label>高度:</label>
-                            <li class="list-group-item active">100m</li>
-                            <li class="list-group-item">250m</li>
-                            <li class="list-group-item">500m</li>
-                            <li class="list-group-item">750m</li>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingThree">
-                    <h4 class="panel-title">
-                        <a role="button" data-toggle="collapse" data-parent="#accordin" href="#collapseThree" aria-expanded="true" aria-controls="collapse">风廓线THI</a>
-                        <span class="glyphicon glyphicon-blackboard"/>
-                    </h4>
-                </div>
-                <div id="collapseThree" class="pane-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
-                    <div class="panel-body">
-                        <div class="list-group" id="dis-list-group">    
-							<label>显示要素:</label>                          
-                            <li class="list-group-item active">水平风(HWind)</li>
-                            <li class="list-group-item">垂直风(ZWind)</li>
-                    	</div>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingFour">
-                    <h4 class="panel-title">
-                        <a role="button" data-toggle="collapse" data-parent="#accordin" href="#collapseFour" aria-expanded="true" aria-controls="collapse">RHI</a>
-                        <span class="glyphicon glyphicon-blackboard"/>
-                    </h4>
-                </div>
-                <div id="collapseFour" class="pane-collapse collapse in" role="tabpanel" aria-labelledby="headingFour">
-                    <div class="panel-body">
-                        <div class="list-group" id="azi-list-group">
-							<label>方位角度:</label>
-                            <li class="list-group-item active">0&deg</li>
-                            <li class="list-group-item">90&deg</li>
-                            <li class="list-group-item">180&deg</li>
-                        </div>
-                    </div>
+            </div>  
+        </div>  
+        <div class='panel panel-default' id="ppi_option_panel">
+            <div class="panel-heading">参数选项</div>
+            <div class="panel-body">
+                <div class="list-group" id ="ele-list-group">
+                    <label>俯仰角度:</label>
+                    <li class="list-group-item active">0&deg</li>
+                    <li class="list-group-item">3&deg</li>
+                    <li class="list-group-item">5&deg</li>
+                    <li class="list-group-item">10&deg</li>
+                    <li class="list-group-item">20&deg</li>
                 </div>
             </div>
         </div>
