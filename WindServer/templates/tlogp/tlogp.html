@@ -29,7 +29,7 @@
     <script src="/static/lightgallery/extern-js/lg-share.min.js"></script>
 
     <script src="/static/js/nav.js"></script>
-    <script src="/static/js/lidar.js"></script>
+    <script src="/static/js/tlogp.js"></script>
  
     <title>Seaglet激光测风雷达数据共享平台</title>
 </head>
@@ -54,13 +54,13 @@
                 <li>
                     <a href="javascript:;" onclick = "nav_catalog('首页');return false">首页</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="javascript:;" onclick = "nav_catalog('激光雷达');return false">激光雷达</a>
                 </li>
                 <li>
                     <a href="javascript:;" onclick = "nav_catalog('融合产品');return false">融合产品</a>
                 </li>
-                <li>
+                <li  class="active">
                     <a href="javascript:;" onclick = "nav_catalog('T-logP图');return false">T-logP图</a>
                 </li>
                 <li>
@@ -82,22 +82,9 @@
             <div class="panel-heading">产品选择</div>
             <div class="panel-body">
                 <div class="list-group" id="product-list-group">
-                    <li class="list-group-item" onclick="load_lidar('PPI拼图')">PPI拼图</li>
-                    <li class="list-group-item" onclick="load_lidar('VOL模式CAPPI')">VOL模式CAPPI</li>
-                    <li class="list-group-item active" onclick="load_lidar('风廓线THI')">风廓线THI</li>
-                    <li class="list-group-item" onclick="load_lidar('RHI')">RHI</li>
+                    <li class="list-group-item active">T-logP图</li>
                 </div>
             </div>  
-        </div>  
-        <div class='panel panel-default' id="ppi_option_panel">
-            <div class="panel-heading">参数选项</div>
-            <div class="panel-body">
-                <div class="list-group" id ="dis-list-group">
-                    <label>显示要素:</label>                          
-                    <li class="list-group-item active">水平风(HWind)</li>
-                    <li class="list-group-item">垂直风(ZWind)</li>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -105,12 +92,12 @@
         <center>
             <div>
                 <ul id="lightgallery" class="list-unstyled row">
-                {% for windthi in windthis %}
-                    <li class="col-xs-6 col-sm-4 col-md-3" data-responsive="{{windthi.img_src}} 800" data-src="{{windthi.img_src}}" data-sub-html="<h3>{{windthi.direction}},{{windthi.station}},{{windthi.date_time}}</h3>" data-pinterest-text="Pin it1" data-tweet-text="share on twitter 1">
+                {% for tlogp in tlogps %}
+                    <li class="col-xs-6 col-sm-4 col-md-3" data-responsive="{{tlogp.img_src}} 800" data-src="{{tlogp.img_src}}" data-sub-html="<h3>{{tlogp.station}},{{tlogp.date_time}}</h3>" data-pinterest-text="Pin it1" data-tweet-text="share on twitter 1">
                         <a href="" data-sub-html=".caption">
-                            <img class="img-responsive" src="{{windthi.img_src}}" alt="Thumb-1">
+                            <img class="img-responsive" src="{{tlogp.img_src}}" alt="Thumb-1">
                             <div class="caption">
-                                <p>{{windthi.direction}},{{windthi.station}},{{windthi.date_time}}</p>
+                                <p>{{tlogp.station}},{{tlogp.date_time}}</p>
                             </div>
                         </a>
                     </li>
@@ -156,7 +143,7 @@
                             </span>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-default" onclick="search_windthi()">搜索</button>
+                    <button type="button" class="btn btn-default" onclick="search_tlogp()">搜索</button>
                 </form>
             </div>  
         </div>  

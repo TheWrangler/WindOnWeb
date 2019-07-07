@@ -38,3 +38,54 @@ class RHI(models.Model):
 
 class RHI_Admin(admin.ModelAdmin):
     list_display = ('azi','station','date_time','img_src')
+
+#fusion data models
+class DBS5(models.Model):
+    fusion=models.CharField(max_length=50)
+    station = models.CharField(max_length=50)
+    date_time = models.DateTimeField()
+    img_src = models.CharField(max_length=250)
+
+# class DBS5_Admin(admin.ModelAdmin):
+#     list_display = ('fusion','station','date_time','img_src')
+    
+class Profile(models.Model):
+    fusion=models.CharField(max_length=50)
+    station = models.CharField(max_length=50)
+    date_time = models.DateTimeField()
+    img_src = models.CharField(max_length=250)
+    
+# class Profile_Admin(admin.ModelAdmin):
+#     list_display = ('fusion','station','date_time','img_src')
+    
+class Radio(models.Model):
+    fusion=models.CharField(max_length=50)
+    station = models.CharField(max_length=50)
+    date_time = models.DateTimeField()
+    img_src = models.CharField(max_length=250)
+
+class Fusion_Admin(admin.ModelAdmin):
+    list_display = ('fusion','station','date_time','img_src')    
+    
+#T-logP model
+class TlogP(models.Model):
+    station = models.CharField(max_length=50)
+    date_time = models.DateTimeField()
+    img_src = models.CharField(max_length=250)
+    
+class TlogP_Admin(admin.ModelAdmin):
+    list_display = ('station','date_time','img_src')  
+
+#Lookup models
+# class WindDirect(models.Model):
+#     hei = models.IntegerField()
+#     station = models.CharField(max_length=50)
+#     date_time = models.DateTimeField()
+#     img_src = models.CharField(max_length=250)
+
+# class WindSpeed(models.Model):
+#     hei = models.IntegerField()
+#     station = models.CharField(max_length=50)
+#     date_time = models.DateTimeField()
+#     img_src = models.CharField(max_length=250)   
+    

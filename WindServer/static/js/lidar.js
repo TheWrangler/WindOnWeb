@@ -75,10 +75,11 @@ function search_rhi()
     var end_dt = $("#datetimepick_end").find("input").val();
 
 	var hostname = window.location.hostname;
-    var url = "http://" + hostname + ":8000/WindServer/lidar/" + "wind_thi/" + azi + "/" + station + "/" + start_dt + "/" + end_dt + "/";
+    var url = "http://" + hostname + ":8000/WindServer/lidar/" + "rhi/" + azi + "/" + station + "/" + start_dt + "/" + end_dt + "/";
 
 	window.location.href = url;
 }
+
 
 $(function(){
     $("#datetimepick_start").datetimepicker({

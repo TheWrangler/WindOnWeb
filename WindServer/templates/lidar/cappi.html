@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="/static/bootstrap-3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
 
+    <link rel="stylesheet" href="/static/lightgallery/css/lightgallery.min.css">
+
     <link rel="stylesheet" href="/static/css/style.css">
 
     <script src="/static/jquery-3.4.1.min.js"></script>
@@ -14,6 +16,16 @@
     <script src="/static/moment-with-locales.js"></script>
     <script src="/static/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
 
+    <script src="/static/lightgallery/js/lightgallery.min.js"></script>
+    <script src="/static/lightgallery/extern-js/lg-thumbnail.min.js"></script>
+    <script src="/static/lightgallery/extern-js/lg-fullscreen.min.js"></script>
+    <script src="/static/lightgallery/extern-js/lg-pager.min.js"></script>
+    <script src="/static/lightgallery/extern-js/lg-autoplay.min.js"></script>
+    <script src="/static/lightgallery/extern-js/lg-zoom.min.js"></script>
+    <script src="/static/lightgallery/extern-js/lg-hash.min.js"></script>
+    <script src="/static/lightgallery/extern-js/lg-share.min.js"></script>
+
+    <script src="/static/js/nav.js"></script>
     <script src="/static/js/lidar.js"></script>
  
     <title>Seaglet激光测风雷达数据共享平台</title>
@@ -37,25 +49,25 @@
             <p class="navbar-text"><b><font size="6">激光测风雷达数据共享平台</font></b></p>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="index.html">首页</a>
+                    <a href="javascript:;" onclick = "nav_catalog('首页');return false">首页</a>
                 </li>
                 <li class="active">
-                    <a href="ppi.html">激光雷达</a>
+                    <a href="javascript:;" onclick = "nav_catalog('激光雷达');return false">激光雷达</a>
                 </li>
                 <li>
-                    <a href="#">融合产品</a>
+                    <a href="javascript:;" onclick = "nav_catalog('融合产品');return false">融合产品</a>
                 </li>
                 <li>
-                    <a href="#">T-logP图</a>
+                    <a href="javascript:;" onclick = "nav_catalog('T-logP图');return false">T-logP图</a>
                 </li>
                 <li>
-                    <a href="#">统计查询</a>
+                    <a href="javascript:;" onclick = "nav_catalog('统计查询');return false">统计查询</a>
                 </li>
                 <li>
-                    <a href="#">服务咨询</a>
+                    <a href="javascript:;" onclick = "nav_catalog('服务咨询');return false">服务咨询</a>
                 </li>
                 <li>
-                    <a href="#">关于我们</a>
+                    <a href="javascript:;" onclick = "nav_catalog('关于我们');return false">关于我们</a>
                 </li>
             </ul>
         </div>
@@ -73,7 +85,7 @@
                 </div>
             </div>  
         </div>  
-        <div class='panel panel-default' id="cappi_option_panel">
+        <div class='panel panel-default'>
             <div class="panel-heading">参数选项</div>   
                 <div class="panel-body">
                     <div class="list-group" id="hei-list-group">
@@ -89,8 +101,22 @@
     </div>
 
     <div class="container col-lg-8 col-md-8">
-        <center><img width="80%" align="middle" src='{{cappi.img_src}}'></center>
-        <p>{{cappi.hei}},{{cappi.station}},{{cappi.date_time}}</p>
+        <center>
+            <div>
+                <ul id="lightgallery" class="list-unstyled row">
+                {% for cappi in cappis %}
+                    <li class="col-xs-6 col-sm-4 col-md-3" data-responsive="{{cappi.img_src}} 800" data-src="{{cappi.img_src}}" data-sub-html="<h3>{{cappi.hei}},{{cappi.station}},{{cappi.date_time}}</h3>" data-pinterest-text="Pin it1" data-tweet-text="share on twitter 1">
+                        <a href="" data-sub-html=".caption">
+                            <img class="img-responsive" src="{{cappi.img_src}}" alt="Thumb-1">
+                            <div class="caption">
+                                <p>{{cappi.hei}},{{cappi.station}},{{cappi.date_time}}</p>
+                            </div>
+                        </a>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+        </center>
     </div>
 
     <div class="container  col-lg-2 col-md-2">
@@ -134,5 +160,14 @@
             </div>  
         </div>  
     </div>
+
+    <script>
+        lightGallery(document.getElementById('lightgallery'),{
+            thumbnail:true,
+            animateThumb:true,
+            showThumbByDefautt:true,
+            subHtmlSelectorRelative:true
+        });
+    </script>
 </body>
 </html>
