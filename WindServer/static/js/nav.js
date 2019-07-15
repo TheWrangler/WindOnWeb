@@ -2,7 +2,7 @@ function nav_catalog(catalog)
 {
     var catalog_site;
     if(catalog == "首页")
-        catalog_site = "lidar";
+        catalog_site = "index";
     else if(catalog == "激光雷达")
         catalog_site = "lidar";
     else if(catalog == "融合产品")

@@ -1,12 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
+from .models import Lidar
 from .models import PPI,CAPPI,WINDTHI,RHI
 from .models import DBS5,Profile,Radio
 from .models import TlogP
 # Create your views here.
 
-def index(request):
-    return render(request, 'index.html')
+# index views
+def index_lidar(request):
+    lidars = Lidar.objects.filter().order_by('-id')[:4]
+    cur_lidar = lidars[0]
+    return render(request, 'index\lidar.html',{'lidars':lidars,'cur_lidar':cur_lidar})
 
 # lidar Views
 def lidar_ppi(request):

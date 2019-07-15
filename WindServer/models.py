@@ -2,6 +2,16 @@ from django.db import models
 from django.contrib import admin
 # Create your models here.
 
+#index data models
+class Lidar(models.Model):
+    hei = models.IntegerField()
+    station = models.CharField(max_length=50)
+    date_time = models.DateTimeField()
+    img_src = models.CharField(max_length=250)
+
+class Lidar_Admin(admin.ModelAdmin):
+    list_display = ('hei','station','date_time','img_src')
+
 #lidar data models
 class PPI(models.Model):
     ele = models.IntegerField()

@@ -5,7 +5,8 @@ from . import views
 app_name='myapp'
  
 urlpatterns = [
-    path('index/',views.index,name='index'),
+    path('index/',views.index_lidar,name='index_lidar'),
+    path('index/lidar',views.index_lidar,name='index_lidar'),
 
     path('lidar/',views.lidar_ppi,name='lidar_ppi'),
     path('lidar/ppi/',views.lidar_ppi,name='lidar_ppi'),

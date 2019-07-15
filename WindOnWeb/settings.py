@@ -119,4 +119,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = ('G:/WindOnWeb/WindOnWeb/static/',)
+STATICFILES_DIRS = ('F:/WindOnWeb/WindOnWeb/static/',)
