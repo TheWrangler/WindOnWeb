@@ -6,13 +6,46 @@ from .models import DBS5,Profile,Radio
 from .models import TlogP
 # Create your views here.
 
-# index views
+############### index views
 def index_lidar(request):
-    lidars = Lidar.objects.filter().order_by('-id')[:4]
-    cur_lidar = lidars[0]
-    return render(request, 'index\lidar.html',{'lidars':lidars,'cur_lidar':cur_lidar})
+    lidars = Lidar.objects.filter().order_by('-date_time')[:4]
+    lidars = lidars[::-1]
+    return render(request, 'index/lidar.html',{'lidars':lidars})
 
-# lidar Views
+def index_lidar_search(request,hei,station,dt):
+    if station == '全站':
+        lidars = Lidar.objects.filter(hei=hei,date_time__gte = dt).order_by('date_time')[:4]
+        return render(request,'index/lidar.html',{'lidars':lidars})
+    else:
+        lidars = Lidar.objects.filter(hei=hei,station=station,date_time__gte = dt).order_by('date_time')[:4]
+        return render(request,'index/lidar.html',{'lidars':lidars})
+
+def index_lidar_last(request,hei,station,dt):
+    if station == '全站':
+        lidars = Lidar.objects.filter(hei=hei,date_time__lt = dt).order_by('-date_time')[:4]
+        lidars = lidars[::-1]
+        return render(request,'index/lidar.html',{'lidars':lidars})
+    else:
+        lidars = Lidar.objects.filter(hei=hei,station=station,date_time__lt = dt).order_by('-date_time')[:4]
+        lidars = lidars[::-1]
+        return render(request,'index/lidar.html',{'lidars':lidars})
+
+def index_lidar_next(request,hei,station,dt):
+    if station == '全站':
+        lidars = Lidar.objects.filter(hei=hei,date_time__gt = dt).order_by('date_time')[:4]
+        return render(request,'index/lidar.html',{'lidars':lidars})
+    else:
+        lidars = Lidar.objects.filter(hei=hei,station=station,date_time__gt = dt).order_by('date_time')[:4]
+        return render(request,'index/lidar.html',{'lidars':lidars})
+    
+def index_lidar_auto(request):
+    return index_lidar(request)
+#############################################################################
+
+
+
+
+################## lidar Views
 def lidar_ppi(request):
     return render(request, 'lidar\ppi.html')
 
@@ -56,7 +89,6 @@ def lidar_rhi_search(request,azi,station,start_dt,end_dt):
     else:
         rhis = RHI.objects.filter(azi=azi,station=station)
         return render(request, r'lidar\rhi.html',{'rhis':rhis})
-
 
 # fusion views
 def fusion_dbs5(request):

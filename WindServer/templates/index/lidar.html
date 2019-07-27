@@ -21,6 +21,9 @@
 
     <script src="/static/js/nav.js"></script>
     <script src="/static/js/index.js"></script>
+    <script>
+        window.onload=page_config;
+    </script>
     
     <title>Seaglet激光测风雷达数据共享平台</title>
 </head>
@@ -87,7 +90,7 @@
                     <div class="form-group">
                         <label for="datetimepick_cur">时间:</label>
                         <div class="input-group date" id="datetimepick_cur">
-                            <input type="text" class="form-control"/>
+                            <input type="text" class="form-control" id="datetimepick_cur_input"/>
                             <span class="input-group-addon"> 
                                 <span class="glyphicon glyphicon-calendar"/>
                             </span>
@@ -103,7 +106,12 @@
                             </select>
                         </div>
                     </div>
-                    <button type="button"  class="btn btn-default" onclick="">检索</button>
+                    <button type="button"  class="btn btn-default" onclick="lidar_search()">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 检索
+                    </button>
+                    <button type="button"  class="btn btn-default" onclick="lidar_search()">
+                        <span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span> 实时
+                    </button>
                 </form>
             </div>
         </div>
@@ -111,21 +119,44 @@
 
     <div class="container col-lg-8 col-md-8">
         <center>
+            {% if lidars|length == 0 %}
             <div>
-                <img src = "{{cur_lidar.img_src}}" width="80%"/>
+                <br/>
+                <p>未检索到满足条件的数据，请调整检索条件再次重试!</p>
+            </div>
+            {% else %}
+            <div>
+                {% for lidar in lidars %}
+                {% if forloop.last %}
+                <img id="active_img" src = "{{lidar.img_src}}" width="80%"/>
+                {% endif %}
+                {% endfor %}
             </div>
             <br/>
-            <div class="btn-group" role="group" id="dt-btn-group">
-                <button type="button" class="btn btn-default" aria-label="Left Align">
+            <div class="btn-group" role="group" id="title-btn-group">
+                {% for lidar in lidars %}
+
+                {% if forloop.first%}
+                <button type="button" class="btn btn-default" onclick="lidar_last_search('{{ lidar.date_time|date:"Y-m-d H:i:s" }}')" aria-label="Left Align">
                     <span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>
                 </button>
-                {% for lidar in lidars %}
-                <button type="button" class="btn btn-default {% if lidar == cur_lidar %}active{% endif %}"><td>{{ lidar.date_time|date:"Y-m-d H:i:s" }}</td></button>
-                {% endfor %}
-                <button type="button" class="btn btn-default" aria-label="Left Align">
+                {% endif %}
+                
+                <button type="button" 
+                        class="btn btn-default {% if lidar == lidars.0 %}active{% endif %}"
+                        onclick="update_img('{{lidar.img_src}}')">
+					<td>{{lidar.station}},{{lidar.hei}},{{ lidar.date_time|date:"Y-m-d H:i:s" }}</td>
+				</button>
+
+                {% if forloop.last %}
+                <button type="button" class="btn btn-default" onclick="lidar_next_search('{{ lidar.date_time|date:"Y-m-d H:i:s" }}')" aria-label="Left Align">
                     <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
                 </button>
+                {% endif %}
+
+                {% endfor %}
             </div>
+            {% endif%}
         </center>
     </div>
 
@@ -133,14 +164,22 @@
 		<div class = "panel panel-default">
             <div class="panel-heading">观测站点</div>
             <div class="panel-body">
-                <div class="btn-group" role="group" id="city-btn-group">
+                <div class="list-group" id="city-list-group">
+                    <li class="list-group-item active" id="全站">全站</li>
+                    <li class="list-group-item" id="翔安">翔安</li>
+                    <li class="list-group-item" id="湖里">湖里</li>
+                    <li class="list-group-item" id="集美">集美</li>
+                    <li class="list-group-item" id="海沧">海沧</li>
+                    <li class="list-group-item" id="同安">同安</li>
+                </div>
+                {% comment %} <div class="btn-group" role="group" id="city-btn-group">
 					<button type="button" class="btn btn-default active">全站</button>
 					<button type="button" class="btn btn-default">翔安</button>
 					<button type="button" class="btn btn-default">湖里</button>
 					<button type="button" class="btn btn-default">集美</button>
 					<button type="button" class="btn btn-default">海沧</button>
 					<button type="button" class="btn btn-default">同安</button>
-        		</div>
+        		</div> {% endcomment %}
             </div>  
         </div>  
         <div class = "panel panel-default">
@@ -150,7 +189,7 @@
                     <div class="form-group">
                         <label for="datetimepick_start">起始时间:</label>
                         <div class="input-group date" id="datetimepick_start">
-                            <input type="text" class="form-control"/>
+                            <input type="text" class="form-control" id="datetimepick_start_input"/>
                             <span class="input-group-addon"> 
                                 <span class="glyphicon glyphicon-calendar"/>
                             </span>
@@ -159,13 +198,15 @@
                     <div class="form-group">
                         <label for="datetimepick_end">结束时间:</label>
                         <div class="input-group date" id="datetimepick_end">
-                            <input type="text" class="form-control"/>
+                            <input type="text" class="form-control" id="datetimepick_end_input"/>
                             <span class="input-group-addon"> 
                                 <span class="glyphicon glyphicon-calendar"/>
                             </span>
                         </div>
                     </div>
-                    <button type="button"  class="btn btn-default" onclick="">搜索</button>
+                    <button type="button"  class="btn btn-default" onclick="">
+                        <span class="glyphicon glyphicon-hourglass" aria-hidden="true"> 浏览
+                    </button>
                 </form>
             </div>  
         </div>  

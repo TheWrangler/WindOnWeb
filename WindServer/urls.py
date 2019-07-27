@@ -6,7 +6,11 @@ app_name='myapp'
  
 urlpatterns = [
     path('index/',views.index_lidar,name='index_lidar'),
-    path('index/lidar',views.index_lidar,name='index_lidar'),
+    path('index/lidar/',views.index_lidar,name='index_lidar'),
+    path('index/lidar/<hei>/<station>/<dt>/',views.index_lidar_search,name='index_lidar_search'),
+    path('index/lidar/<hei>/<station>/<dt>/last/',views.index_lidar_last,name='index_lidar_last'),
+    path('index/lidar/<hei>/<station>/<dt>/next/',views.index_lidar_next,name='index_lidar_next'),
+    path('index/lidar/<hei>/<station>/<start_dt>/<end_dt>/auto/',views.index_lidar_auto,name='index_lidar_auto'),
 
     path('lidar/',views.lidar_ppi,name='lidar_ppi'),
     path('lidar/ppi/',views.lidar_ppi,name='lidar_ppi'),
