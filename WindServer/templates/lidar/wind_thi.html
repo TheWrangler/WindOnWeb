@@ -5,28 +5,19 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="/static/bootstrap-3.4.1/css/bootstrap.min.css">
-
     <link rel="stylesheet" href="/static/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
 
-    <link rel="stylesheet" href="/static/lightgallery/css/lightgallery.min.css">
+    <link rel="stylesheet" href ="/static/select2/css/select2.min.css"> 
 
     <link rel="stylesheet" href="/static/css/style.css">
 
     <script src="/static/jquery-3.4.1.min.js"></script>
-
     <script src="/static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
-
     <script src="/static/moment-with-locales.js"></script>
     <script src="/static/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
 
-    <script src="/static/lightgallery/js/lightgallery.min.js"></script>
-    <script src="/static/lightgallery/extern-js/lg-thumbnail.min.js"></script>
-    <script src="/static/lightgallery/extern-js/lg-fullscreen.min.js"></script>
-    <script src="/static/lightgallery/extern-js/lg-pager.min.js"></script>
-    <script src="/static/lightgallery/extern-js/lg-autoplay.min.js"></script>
-    <script src="/static/lightgallery/extern-js/lg-zoom.min.js"></script>
-    <script src="/static/lightgallery/extern-js/lg-hash.min.js"></script>
-    <script src="/static/lightgallery/extern-js/lg-share.min.js"></script>
+    <script src="/static/select2/js/select2.full.min.js"></script>
+    <script src="/static/select2/js/i18n/zh-CN.js"></script>
 
     <script src="/static/js/nav.js"></script>
     <script src="/static/js/lidar.js"></script>
@@ -92,31 +83,71 @@
         <div class='panel panel-default' id="ppi_option_panel">
             <div class="panel-heading">参数选项</div>
             <div class="panel-body">
-                <div class="list-group" id ="dis-list-group">
-                    <label>显示要素:</label>                          
-                    <li class="list-group-item active">水平风(HWind)</li>
-                    <li class="list-group-item">垂直风(ZWind)</li>
+                <div class="form-group">
+                    <label for="datetimepick_cur">时间:</label>
+                    <div class="input-group date" id="datetimepick_cur">
+                        <input type="text" class="form-control" id="datetimepick_cur_input"/>
+                        <span class="input-group-addon"> 
+                            <span class="glyphicon glyphicon-calendar"/>
+                        </span>
+                    </div>
                 </div>
+                <div class="list-group" id ="dir-list-group">
+                    <label>显示要素:</label>                          
+                    <li class="list-group-item active" id="水平风">水平风</li>
+                    <li class="list-group-item" id="垂直风">垂直风</li>
+                </div>
+                <button type="button"  class="btn btn-default" onclick="lidar_search('wind_thi')">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 检索
+                </button>
+                <button type="button"  class="btn btn-default" onclick="lidar_auto_update()">
+                    <span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span> 实时
+                </button>
             </div>
         </div>
     </div>
 
     <div class="container col-lg-8 col-md-8">
         <center>
+            {% if windthis|length == 0 %}
             <div>
-                <ul id="lightgallery" class="list-unstyled row">
-                {% for windthi in windthis %}
-                    <li class="col-xs-6 col-sm-4 col-md-3" data-responsive="{{windthi.img_src}} 800" data-src="{{windthi.img_src}}" data-sub-html="<h3>{{windthi.direction}},{{windthi.station}},{{windthi.date_time}}</h3>" data-pinterest-text="Pin it1" data-tweet-text="share on twitter 1">
-                        <a href="" data-sub-html=".caption">
-                            <img class="img-responsive" src="{{windthi.img_src}}" alt="Thumb-1">
-                            <div class="caption">
-                                <p>{{windthi.direction}},{{windthi.station}},{{windthi.date_time}}</p>
-                            </div>
-                        </a>
-                    </li>
-                {% endfor %}
-                </ul>
+                <br/>
+                <p>未检索到满足条件的数据，请调整检索条件再次重试!</p>
             </div>
+            {% else %}
+            <div>
+                {% for windthi in windthis %}
+                {% if forloop.last %}
+                <img id="active_img" src = "{{windthi.img_src}}" width="80%"/>
+                {% endif %}
+                {% endfor %}
+            </div>
+            <br/>
+            <div class="btn-group" role="group" id="title-btn-group">
+                {% for windthi in windthis %}
+
+                {% if forloop.first%}
+                <button type="button" class="btn btn-default" id="btn-last" onclick="lidar_last_search('wind_thi','{{ windthi.date_time|date:"Y-m-d H:i:s" }}')" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>
+                </button>
+                {% endif %}
+                
+                <button type="button" 
+                        class="btn btn-default {% if forloop.last %}active{% endif %}"
+                        onclick="update_img('{{windthi.img_src}}')"
+                        id = '{{ windthi.date_time|date:"Y-m-d H:i:s" }}'>
+                    <td>{{windthi.station}},{{windthi.direction}},{{ windthi.date_time|date:"Y-m-d H:i:s" }}</td>
+                </button>
+
+                {% if forloop.last %}
+                <button type="button" class="btn btn-default" id="btn-next" onclick="lidar_next_search('wind_thi','{{ windthi.date_time|date:"Y-m-d H:i:s" }}')" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+                </button>
+                {% endif %}
+
+                {% endfor %}
+            </div>
+            {% endif%}
         </center>
     </div>
 
@@ -124,14 +155,14 @@
 		<div class = "panel panel-default">
             <div class="panel-heading">观测站点</div>
             <div class="panel-body">
-                <div class="btn-group" role="group" id="city-btn-group">
-					<button type="button" class="btn btn-default active"">全站</button>
-					<button type="button" class="btn btn-default">翔安</button>
-					<button type="button" class="btn btn-default">湖里</button>
-					<button type="button" class="btn btn-default">集美</button>
-					<button type="button" class="btn btn-default">海沧</button>
-					<button type="button" class="btn btn-default">同安</button>
-        		</div>
+                <div class="list-group" id="city-list-group">
+                    <li class="list-group-item active" id="全站">全站</li>
+                    <li class="list-group-item" id="翔安">翔安</li>
+                    <li class="list-group-item" id="湖里">湖里</li>
+                    <li class="list-group-item" id="集美">集美</li>
+                    <li class="list-group-item" id="海沧">海沧</li>
+                    <li class="list-group-item" id="同安">同安</li>
+                </div>
             </div>  
         </div>  
         <div class = "panel panel-default">
@@ -141,7 +172,7 @@
                     <div class="form-group">
                         <label for="datetimepick_start">起始时间:</label>
                         <div class="input-group date" id="datetimepick_start">
-                            <input type="text" class="form-control"/>
+                            <input type="text" class="form-control" id="datetimepick_start_input"/>
                             <span class="input-group-addon"> 
                                 <span class="glyphicon glyphicon-calendar"/>
                             </span>
@@ -150,25 +181,18 @@
                     <div class="form-group">
                         <label for="datetimepick_end">结束时间:</label>
                         <div class="input-group date" id="datetimepick_end">
-                            <input type="text" class="form-control"/>
+                            <input type="text" class="form-control" id="datetimepick_end_input"/>
                             <span class="input-group-addon"> 
                                 <span class="glyphicon glyphicon-calendar"/>
                             </span>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-default" onclick="search_windthi()">搜索</button>
+                    <button type="button"  class="btn btn-default" onclick="lidar_auto_refresh('True')">
+                        <span class="glyphicon glyphicon-hourglass" aria-hidden="true"> 浏览
+                    </button>
                 </form>
             </div>  
         </div>  
     </div>
-
-    <script>
-        lightGallery(document.getElementById('lightgallery'),{
-            thumbnail:true,
-            animateThumb:true,
-            showThumbByDefautt:true,
-            subHtmlSelectorRelative:true
-        });
-    </script>
 </body>
 </html>

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/static/bootstrap-3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
 
-    <link rel="stylesheet" href="/static/lightgallery/css/lightgallery.min.css">
+    <link rel="stylesheet" href ="/static/select2/css/select2.min.css"> 
 
     <link rel="stylesheet" href="/static/css/style.css">
 
@@ -16,14 +16,8 @@
     <script src="/static/moment-with-locales.js"></script>
     <script src="/static/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
 
-    <script src="/static/lightgallery/js/lightgallery.min.js"></script>
-    <script src="/static/lightgallery/extern-js/lg-thumbnail.min.js"></script>
-    <script src="/static/lightgallery/extern-js/lg-fullscreen.min.js"></script>
-    <script src="/static/lightgallery/extern-js/lg-pager.min.js"></script>
-    <script src="/static/lightgallery/extern-js/lg-autoplay.min.js"></script>
-    <script src="/static/lightgallery/extern-js/lg-zoom.min.js"></script>
-    <script src="/static/lightgallery/extern-js/lg-hash.min.js"></script>
-    <script src="/static/lightgallery/extern-js/lg-share.min.js"></script>
+    <script src="/static/select2/js/select2.full.min.js"></script>
+    <script src="/static/select2/js/i18n/zh-CN.js"></script>
 
     <script src="/static/js/nav.js"></script>
     <script src="/static/js/lidar.js"></script>
@@ -139,7 +133,7 @@
                     <div class="form-group">
                         <label for="datetimepick_start">起始时间:</label>
                         <div class="input-group date" id="datetimepick_start">
-                            <input type="text" class="form-control"/>
+                            <input type="text" class="form-control" id="datetimepick_start_input"/>
                             <span class="input-group-addon"> 
                                 <span class="glyphicon glyphicon-calendar"/>
                             </span>
@@ -148,7 +142,7 @@
                     <div class="form-group">
                         <label for="datetimepick_end">结束时间:</label>
                         <div class="input-group date" id="datetimepick_end">
-                            <input type="text" class="form-control"/>
+                            <input type="text" class="form-control" id="datetimepick_end_input"/>
                             <span class="input-group-addon"> 
                                 <span class="glyphicon glyphicon-calendar"/>
                             </span>
