@@ -3,7 +3,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from WindServer.models import Lidar
 
 def lidar(request):
-    lidars = Lidar.objects.filter(hei=0,station='全站').order_by('-date_time')[:4]
+    lidars = Lidar.objects.order_by('-date_time')[:4]
     lidars = lidars[::-1]
     return render(request, 'index/lidar.html',{'lidars':lidars})
 

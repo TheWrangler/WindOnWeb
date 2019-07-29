@@ -4,7 +4,7 @@ from WindServer.models import PPI,CAPPI,WINDTHI,RHI
 
 ###################################ppi views#######################################
 def ppi(request):
-    ppis = PPI.objects.filter(ele=0).order_by('-date_time')[:4]
+    ppis = PPI.objects.order_by('-date_time')[:4]
     ppis = ppis[::-1]
     return render(request, 'lidar/ppi.html',{'ppis':ppis})
 
@@ -49,7 +49,7 @@ def ppi_auto(request,ele,station,start_dt,end_dt):
 
 ###################################cappi views#######################################
 def cappi(request):
-    cappis = CAPPI.objects.filter(hei=100).order_by('-date_time')[:4]
+    cappis = CAPPI.objects.order_by('-date_time')[:4]
     cappis = cappis[::-1]
     return render(request, 'lidar/cappi.html',{'cappis':cappis})
 
@@ -93,7 +93,7 @@ def cappi_auto(request,hei,station,start_dt,end_dt):
 
 ###################################windthi views#######################################
 def windthi(request):
-    windthis = WINDTHI.objects.filter(direction='水平风').order_by('-date_time')[:4]
+    windthis = WINDTHI.objects.order_by('-date_time')[:4]
     windthis = windthis[::-1]
     return render(request, 'lidar/wind_thi.html',{'windthis':windthis})
 
@@ -135,13 +135,46 @@ def windthi_auto(request,direction,station,start_dt,end_dt):
     return render(request,'lidar/wind_thi.html',{'windthis':windthis})
 ###################################################################################
 
-# def lidar_rhi(request):
-#     return render(request, r'lidar/rhi.html')
+###################################rhi views#######################################
+def rhi(request):
+    rhis = RHI.objects.order_by('-date_time')[:4]
+    rhis = rhis[::-1]
+    return render(request, 'lidar/rhi.html',{'rhis':rhis})
 
-# def lidar_rhi_search(request,azi,station,start_dt,end_dt):
-#     if station == '全站':
-#         rhis = RHI.objects.filter(azi=azi)
-#         return render(request, r'lidar/rhi.html',{'rhis':rhis})
-#     else:
-#         rhis = RHI.objects.filter(azi=azi,station=station)
-#         return render(request, r'lidar/rhi.html',{'rhis':rhis})
+def rhi_update(request,azi,station):
+    if(station == '全站'):
+        rhis = RHI.objects.filter(azi=azi).order_by('-date_time')[:4]
+    else:
+        rhis = RHI.objects.filter(azi=azi,station=station).order_by('-date_time')[:4]
+    rhis = rhis[::-1]
+    return render(request, 'lidar/rhi.html',{'rhis':rhis})
+
+def rhi_search(request,azi,station,dt):
+    if(station == '全站'):
+        rhis = RHI.objects.filter(azi=azi,date_time__gte = dt).order_by('date_time')[:4]
+    else:
+        rhis = RHI.objects.filter(azi=azi,station=station,date_time__gte = dt).order_by('date_time')[:4]
+    return render(request, 'lidar/rhi.html',{'rhis':rhis})
+
+def rhi_last(request,azi,station,dt):
+    if station == '全站':
+        rhis = RHI.objects.filter(azi=azi,date_time__lt = dt).order_by('-date_time')[:4]
+    else:
+        rhis = RHI.objects.filter(azi=azi,station=station,date_time__lt = dt).order_by('-date_time')[:4]
+    rhis = rhis[::-1]
+    return render(request,'lidar/rhi.html',{'rhis':rhis})
+
+def rhi_next(request,azi,station,dt):
+    if station == '全站':
+        rhis = RHI.objects.filter(azi=azi,date_time__gt = dt).order_by('date_time')[:4]
+    else:
+        rhis = RHI.objects.filter(azi=azi,station=station,date_time__gt = dt).order_by('date_time')[:4]
+    return render(request,'lidar/rhi.html',{'rhis':rhis})
+    
+def rhi_auto(request,azi,station,start_dt,end_dt):
+    if station == '全站':
+        rhis = RHI.objects.filter(azi=azi,date_time__gt=start_dt,date_time__lt=end_dt).order_by('date_time')[:1]
+    else:
+        rhis = RHI.objects.filter(azi=azi,station=station,date_time__gt=start_dt,date_time__lt=end_dt).order_by('date_time')[:1]
+    return render(request,'lidar/rhi.html',{'rhis':rhis})
+###################################################################################

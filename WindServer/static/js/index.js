@@ -35,26 +35,6 @@ $(function(){
     });
 });
 
-function SelectCity(city)
-{
-    var citys = document.getElementById("city-list-group").childNodes;
-    for(let station of citys)
-    {
-        if(station.nodeName == "#text")
-            continue;
-            
-        if(city == station.id)
-            document.getElementById(station.id).classList.add("active");
-        else document.getElementById(station.id).classList.remove("active");
-    }
-}
-
-function update_img(imgSrc)
-{
-    var element = document.getElementById('active_img');
-    element.src = imgSrc;
-}
-
 function lidar_search()
 {
     var hei = $("#height-select").val(); 
@@ -86,13 +66,19 @@ function lidar_next_search(dt)
 	window.location.href = url;
 }
 
-//auto refresh page when browse history.
 function lidar_auto_refresh(bStart)
 {
     var hei = $("#height-select").val();
     var start_dt; 
     if(bStart)
+    {
         start_dt = $("#datetimepick_start").find("input").val(); 
+        if(start_dt == "")
+        {
+            alert("请设置浏览的起始时间！")
+            return;
+        }
+    } 
     else
     {
         var titles = document.getElementById("title-btn-group").childNodes;
@@ -117,6 +103,11 @@ function lidar_auto_refresh(bStart)
     }
 
     var end_dt = $("#datetimepick_end").find("input").val(); 
+    if(end_dt == "")
+    {
+        alert("请设置浏览的结束时间！")
+        return;
+    }
 
     var station = $("#city-list-group .active").text();
 	var hostname = window.location.hostname;
@@ -125,7 +116,6 @@ function lidar_auto_refresh(bStart)
 	window.location.href = url;
 }
 
-//auto refresh page to load newest
 function lidar_auto_update()
 {
     var hei = $("#height-select").val();  
@@ -141,14 +131,21 @@ function page_config()
     var path = window.location.pathname;
     var filters = path.split("/");
     if(filters.length <= 5)
-        gb_timer = setTimeout(lidar_auto_update,6000);
+    {
+        var cur_dt = DateTimeFormat(new Date());
+        $("#datetimepick_cur_input").val(cur_dt);
+    }
     else if(filters.length <= 9)
     {
         $("#height-select").val(filters[4]).trigger("change");
         SelectCity(decodeURI(filters[5]));
 
         if(filters[6] == "update")
+        {
             gb_timer = setTimeout(lidar_auto_update,6000);
+            var cur_dt = DateTimeFormat(new Date());
+            $("#datetimepick_cur_input").val(cur_dt);
+        }
         else 
         {
             var cur_dt = decodeURI(filters[6]);
@@ -164,6 +161,8 @@ function page_config()
         $("#datetimepick_start_input").val(start_dt);
         var end_dt = decodeURI(filters[7]);
         $("#datetimepick_end_input").val(end_dt);
+
+        $("#datetimepick_cur_input").val(start_dt);
 
 		gb_timer = setTimeout(lidar_auto_refresh,3000);
     }

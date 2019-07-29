@@ -55,18 +55,12 @@ class DBS5(models.Model):
     station = models.CharField(max_length=50)
     date_time = models.DateTimeField()
     img_src = models.CharField(max_length=250)
-
-# class DBS5_Admin(admin.ModelAdmin):
-#     list_display = ('fusion','station','date_time','img_src')
     
 class Profile(models.Model):
     fusion=models.CharField(max_length=50)
     station = models.CharField(max_length=50)
     date_time = models.DateTimeField()
     img_src = models.CharField(max_length=250)
-    
-# class Profile_Admin(admin.ModelAdmin):
-#     list_display = ('fusion','station','date_time','img_src')
     
 class Radio(models.Model):
     fusion=models.CharField(max_length=50)

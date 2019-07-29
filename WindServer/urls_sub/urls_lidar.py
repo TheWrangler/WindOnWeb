@@ -23,4 +23,11 @@ urlpatterns = [
     path('wind_thi/<direction>/<station>/<dt>/last/',views_lidar.windthi_last,name='windthi_last'),
     path('wind_thi/<direction>/<station>/<dt>/next/',views_lidar.windthi_next,name='windthi_next'),
     path('wind_thi/<direction>/<station>/<start_dt>/<end_dt>/auto/',views_lidar.windthi_auto,name='windthi_auto'),
+
+    path('rhi/',views_lidar.rhi,name='rhi'),
+    path('rhi/<azi>/<station>/update/',views_lidar.rhi_update,name='rhi_update'),
+    path('rhi/<azi>/<station>/<dt>/',views_lidar.rhi_search,name='rhi_search'),
+    path('rhi/<azi>/<station>/<dt>/last/',views_lidar.rhi_last,name='rhi_last'),
+    path('rhi/<azi>/<station>/<dt>/next/',views_lidar.rhi_next,name='rhi_next'),
+    path('rhi/<azi>/<station>/<start_dt>/<end_dt>/auto/',views_lidar.rhi_auto,name='rhi_auto'),
 ]

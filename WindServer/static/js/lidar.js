@@ -72,18 +72,28 @@ $(function(){
     });
 });
 
-function SelectCity(city)
+function GetFilter(product)
 {
-    var citys = document.getElementById("city-list-group").childNodes;
-    for(let station of citys)
+    var filter;
+    if(product == "ppi")
     {
-        if(station.nodeName == "#text")
-            continue;
-            
-        if(city == station.id)
-            document.getElementById(station.id).classList.add("active");
-        else document.getElementById(station.id).classList.remove("active");
+        filter = $("#ele-list-group .active").text();
+        filter = filter.substring(0,filter.length-1);
     }
+    else if(product == "cappi")
+    {
+        filter = $("#height-select").val();
+    }
+    else if(product == "wind_thi")
+    {
+        filter = $("#dir-list-group .active").text();
+    }
+    else if(product == "rhi")
+    {
+        filter = $("#azi-list-group .active").text();
+        filter = filter.substring(0,filter.length-1);
+    }
+    return filter;
 }
 
 function SelectEle(ele)
@@ -114,29 +124,23 @@ function SelectDirection(direction)
     }
 }
 
-function update_img(imgSrc)
+function SelectAzi(azi)
 {
-    var element = document.getElementById('active_img');
-    element.src = imgSrc;
+    var azis = document.getElementById("azi-list-group").childNodes;
+    for(let azi_e of azis)
+    {
+        if(azi_e.nodeName != "LI")
+            continue;
+            
+        if(azi == azi_e.id)
+            document.getElementById(azi_e.id).classList.add("active");
+        else document.getElementById(azi_e.id).classList.remove("active");
+    }
 }
 
 function lidar_search(product)
 {
-    var filter;
-    if(product == "ppi")
-    {
-        filter = $("#ele-list-group .active").text();
-        filter = filter.substring(0,filter.length-1);
-    }
-    else if(product == "cappi")
-    {
-        filter = $("#height-select").val();
-    }
-    else if(product == "wind_thi")
-    {
-        filter = $("#dir-list-group .active").text();
-    }
-
+    var filter = GetFilter(product);
     var station = $("#city-list-group .active").text();
     var dt = $("#datetimepick_cur").find("input").val(); 
 	var hostname = window.location.hostname;
@@ -147,20 +151,7 @@ function lidar_search(product)
 
 function lidar_last_search(product,dt)
 {
-    var filter;
-    if(product == "ppi")
-    {
-        filter = $("#ele-list-group .active").text();
-        filter = filter.substring(0,filter.length-1);
-    }
-    else if(product == "cappi")
-    {
-        filter = $("#height-select").val();
-    }
-    else if(product == "wind_thi")
-    {
-        filter = $("#dir-list-group .active").text();
-    }
+    var filter = GetFilter(product);
 
     var station = $("#city-list-group .active").text();
 	var hostname = window.location.hostname;
@@ -171,20 +162,7 @@ function lidar_last_search(product,dt)
 
 function lidar_next_search(product,dt)
 {
-    var filter;
-    if(product == "ppi")
-    {
-        filter = $("#ele-list-group .active").text();
-        filter = filter.substring(0,filter.length-1);
-    }
-    else if(product == "cappi")
-    {
-        filter = $("#height-select").val();
-    }
-    else if(product == "wind_thi")
-    {
-        filter = $("#dir-list-group .active").text();
-    }
+    var filter = GetFilter(product);
 
     var station = $("#city-list-group .active").text();
 	var hostname = window.location.hostname;
@@ -199,24 +177,18 @@ function lidar_auto_refresh(bStart)
     var caption = $("#product-list-group .active").text();
     var product = lidar_caption_2_product(caption);
 
-    var filter;
-    if(product == "ppi")
-    {
-        filter = $("#ele-list-group .active").text();
-        filter = filter.substring(0,filter.length-1);
-    }
-    else if(product == "cappi")
-    {
-        filter = $("#height-select").val();
-    }
-    else if(product == "wind_thi")
-    {
-        filter = $("#dir-list-group .active").text();
-    }
+    var filter = GetFilter(product);
     
     var start_dt; 
     if(bStart)
+    {
         start_dt = $("#datetimepick_start").find("input").val(); 
+        if(start_dt == "")
+        {
+            alert("请设置浏览的起始时间！")
+            return;
+        }
+    }
     else
     {
         var titles = document.getElementById("title-btn-group").childNodes;
@@ -241,6 +213,11 @@ function lidar_auto_refresh(bStart)
     }
 
     var end_dt = $("#datetimepick_end").find("input").val(); 
+    if(end_dt == "")
+    {
+        alert("请设置浏览的结束时间！")
+        return;
+    }
 
     var station = $("#city-list-group .active").text();
 	var hostname = window.location.hostname;
@@ -255,39 +232,11 @@ function lidar_auto_update()
     var caption = $("#product-list-group .active").text();
     var product = lidar_caption_2_product(caption);
 
-    var filter;
-    if(product == "ppi")
-    {
-        filter = $("#ele-list-group .active").text();
-        filter = filter.substring(0,filter.length-1);
-    }
-    else if(product == "cappi")
-    {
-        filter = $("#height-select").val();
-    }
-    else if(product == "wind_thi")
-    {
-        filter = $("#dir-list-group .active").text();
-    }
+    var filter = GetFilter(product);
 
     var station = $("#city-list-group .active").text();
 	var hostname = window.location.hostname;
     var url = "http://" + hostname + ":8000/WindServer/lidar/" + product + "/" + filter + "/" + station + "/update/";
-
-	window.location.href = url;
-}
-
-function search_rhi()
-{
-	var azi = $("#azi-list-group .active").text();
-    azi = azi.substring(0,azi.length-1);
-    
-    var station = $("#city-btn-group .active").text();
-    var start_dt = $("#datetimepick_start").find("input").val();
-    var end_dt = $("#datetimepick_end").find("input").val();
-
-	var hostname = window.location.hostname;
-    var url = "http://" + hostname + ":8000/WindServer/lidar/" + "rhi/" + azi + "/" + station + "/" + start_dt + "/" + end_dt + "/";
 
 	window.location.href = url;
 }
@@ -300,7 +249,10 @@ function page_config(product)
     var path = window.location.pathname;
     var filters = path.split("/");
     if(filters.length <= 5)
-        gb_timer = setTimeout(lidar_auto_update,6000);
+    {
+        var cur_dt = DateTimeFormat(new Date());
+        $("#datetimepick_cur_input").val(cur_dt);
+    }
     else if(filters.length <= 9)
     {
         if(product == "ppi")
@@ -309,10 +261,18 @@ function page_config(product)
             $("#height-select").val(filters[4]).trigger("change");
         else if(product == "wind_thi")
             SelectDirection(decodeURI(filters[4]));
+        else if(product == "rhi")
+            SelectAzi(decodeURI(filters[4]));
+
         SelectCity(decodeURI(filters[5]));
 
         if(filters[6] == "update")
+        {
             gb_timer = setTimeout(lidar_auto_update,6000);
+
+            var cur_dt = DateTimeFormat(new Date());
+            $("#datetimepick_cur_input").val(cur_dt);
+        }  
         else 
         {
             var cur_dt = decodeURI(filters[6]);
@@ -327,12 +287,17 @@ function page_config(product)
             $("#height-select").val(filters[4]).trigger("change");
         else if(product == "wind_thi")
             SelectDirection(decodeURI(filters[4]));
+        else if(product == "rhi")
+            SelectAzi(decodeURI(filters[4]));
+
         SelectCity(decodeURI(filters[5]));
 
         var start_dt = decodeURI(filters[6]);
         $("#datetimepick_start_input").val(start_dt);
         var end_dt = decodeURI(filters[7]);
         $("#datetimepick_end_input").val(end_dt);
+
+        $("#datetimepick_cur_input").val(start_dt);
 
 		gb_timer = setTimeout(lidar_auto_refresh,3000);
     }
