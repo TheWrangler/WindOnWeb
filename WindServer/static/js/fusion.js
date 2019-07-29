@@ -17,7 +17,7 @@ function load_fusion(caption)
    
 
     var hostname = window.location.hostname;
-    var url = "http://" + hostname + ":8000/WindServer/fusion/" + product + "/";
+    var url = "http://" + hostname + ":80/WindServer/fusion/" + product + "/";
 
 	window.location.href = url;
 }
@@ -83,7 +83,7 @@ function fusion_search(product)
     var station = $("#city-list-group .active").text();
     var dt = $("#datetimepick_cur").find("input").val(); 
 	var hostname = window.location.hostname;
-    var url = "http://" + hostname + ":8000/WindServer/fusion/" + product + "/" + filter + "/" + station + "/" + dt + "/";
+    var url = "http://" + hostname + ":80/WindServer/fusion/" + product + "/" + filter + "/" + station + "/" + dt + "/";
 
 	window.location.href = url;
 }
@@ -94,7 +94,7 @@ function fusion_last_search(product,dt)
 
     var station = $("#city-list-group .active").text();
 	var hostname = window.location.hostname;
-    var url = "http://" + hostname + ":8000/WindServer/fusion/" + product + "/" + filter + "/" + station + "/" + dt + "/last/";
+    var url = "http://" + hostname + ":80/WindServer/fusion/" + product + "/" + filter + "/" + station + "/" + dt + "/last/";
 
 	window.location.href = url;
 }
@@ -105,7 +105,7 @@ function fusion_next_search(product,dt)
 
     var station = $("#city-list-group .active").text();
 	var hostname = window.location.hostname;
-    var url = "http://" + hostname + ":8000/WindServer/fusion/" + product + "/" + filter + "/" + station + "/" + dt + "/next/";
+    var url = "http://" + hostname + ":80/WindServer/fusion/" + product + "/" + filter + "/" + station + "/" + dt + "/next/";
 
 	window.location.href = url;
 }
@@ -160,7 +160,7 @@ function fusion_auto_refresh(bStart)
 
     var station = $("#city-list-group .active").text();
 	var hostname = window.location.hostname;
-    var url = "http://" + hostname + ":8000/WindServer/fusion/" + product + "/" + filter + "/" + station + "/" + start_dt +  "/" + end_dt + "/auto/";
+    var url = "http://" + hostname + ":80/WindServer/fusion/" + product + "/" + filter + "/" + station + "/" + start_dt +  "/" + end_dt + "/auto/";
 
 	window.location.href = url;
 }
@@ -175,7 +175,7 @@ function fusion_auto_update()
 
     var station = $("#city-list-group .active").text();
 	var hostname = window.location.hostname;
-    var url = "http://" + hostname + ":8000/WindServer/fusion/" + product + "/" + filter + "/" + station + "/update/";
+    var url = "http://" + hostname + ":80/WindServer/fusion/" + product + "/" + filter + "/" + station + "/update/";
 
 	window.location.href = url;
 }

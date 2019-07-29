@@ -41,7 +41,7 @@ function lidar_search()
     var dt = $("#datetimepick_cur").find("input").val(); 
     var station = $("#city-list-group .active").text();
 	var hostname = window.location.hostname;
-    var url = "http://" + hostname + ":8000/WindServer/index/lidar/" + hei + "/" + station + "/" + dt +  "/";
+    var url = "http://" + hostname + ":80/WindServer/index/lidar/" + hei + "/" + station + "/" + dt +  "/";
 
 	window.location.href = url;
 }
@@ -51,7 +51,7 @@ function lidar_last_search(dt)
     var hei = $("#height-select").val();  
     var station = $("#city-list-group .active").text();
 	var hostname = window.location.hostname;
-    var url = "http://" + hostname + ":8000/WindServer/index/lidar/" + hei + "/" + station + "/" + dt +  "/last/";
+    var url = "http://" + hostname + ":80/WindServer/index/lidar/" + hei + "/" + station + "/" + dt +  "/last/";
 
 	window.location.href = url;
 }
@@ -61,7 +61,7 @@ function lidar_next_search(dt)
     var hei = $("#height-select").val();  
     var station = $("#city-list-group .active").text();
 	var hostname = window.location.hostname;
-    var url = "http://" + hostname + ":8000/WindServer/index/lidar/" + hei + "/" + station + "/" + dt +  "/next/";
+    var url = "http://" + hostname + ":80/WindServer/index/lidar/" + hei + "/" + station + "/" + dt +  "/next/";
 
 	window.location.href = url;
 }
@@ -111,7 +111,7 @@ function lidar_auto_refresh(bStart)
 
     var station = $("#city-list-group .active").text();
 	var hostname = window.location.hostname;
-    var url = "http://" + hostname + ":8000/WindServer/index/lidar/" + hei + "/" + station + "/" + start_dt +  "/" + end_dt + "/auto/";
+    var url = "http://" + hostname + ":80/WindServer/index/lidar/" + hei + "/" + station + "/" + start_dt +  "/" + end_dt + "/auto/";
 
 	window.location.href = url;
 }
@@ -121,7 +121,7 @@ function lidar_auto_update()
     var hei = $("#height-select").val();  
     var station = $("#city-list-group .active").text();
 	var hostname = window.location.hostname;
-    var url = "http://" + hostname + ":8000/WindServer/index/lidar/" + hei + "/" + station + "/update/";
+    var url = "http://" + hostname + ":80/WindServer/index/lidar/" + hei + "/" + station + "/update/";
 
 	window.location.href = url;
 }

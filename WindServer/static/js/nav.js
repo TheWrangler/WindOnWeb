@@ -11,7 +11,7 @@ function nav_catalog(catalog)
         catalog_site = "tlogp";
 
     var hostname = window.location.hostname;
-    var url = "http://" + hostname + ":8000/WindServer/" + catalog_site + "/";
+    var url = "http://" + hostname + ":80/WindServer/" + catalog_site + "/";
 
 	window.location.href = url;
 }

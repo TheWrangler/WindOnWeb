@@ -18,7 +18,7 @@ function load_lidar(caption)
     var product = lidar_caption_2_product(caption);
 
     var hostname = window.location.hostname;
-    var url = "http://" + hostname + ":8000/WindServer/lidar/" + product + "/";
+    var url = "http://" + hostname + ":80/WindServer/lidar/" + product + "/";
 
 	window.location.href = url;
 }
@@ -144,7 +144,7 @@ function lidar_search(product)
     var station = $("#city-list-group .active").text();
     var dt = $("#datetimepick_cur").find("input").val(); 
 	var hostname = window.location.hostname;
-    var url = "http://" + hostname + ":8000/WindServer/lidar/" + product + "/" + filter + "/" + station + "/" + dt + "/";
+    var url = "http://" + hostname + ":80/WindServer/lidar/" + product + "/" + filter + "/" + station + "/" + dt + "/";
 
 	window.location.href = url;
 }
@@ -155,7 +155,7 @@ function lidar_last_search(product,dt)
 
     var station = $("#city-list-group .active").text();
 	var hostname = window.location.hostname;
-    var url = "http://" + hostname + ":8000/WindServer/lidar/" + product + "/" + filter + "/" + station + "/" + dt + "/last/";
+    var url = "http://" + hostname + ":80/WindServer/lidar/" + product + "/" + filter + "/" + station + "/" + dt + "/last/";
 
 	window.location.href = url;
 }
@@ -166,7 +166,7 @@ function lidar_next_search(product,dt)
 
     var station = $("#city-list-group .active").text();
 	var hostname = window.location.hostname;
-    var url = "http://" + hostname + ":8000/WindServer/lidar/" + product + "/" + filter + "/" + station + "/" + dt + "/next/";
+    var url = "http://" + hostname + ":80/WindServer/lidar/" + product + "/" + filter + "/" + station + "/" + dt + "/next/";
 
 	window.location.href = url;
 }
@@ -221,7 +221,7 @@ function lidar_auto_refresh(bStart)
 
     var station = $("#city-list-group .active").text();
 	var hostname = window.location.hostname;
-    var url = "http://" + hostname + ":8000/WindServer/lidar/" + product + "/" + filter + "/" + station + "/" + start_dt +  "/" + end_dt + "/auto/";
+    var url = "http://" + hostname + ":80/WindServer/lidar/" + product + "/" + filter + "/" + station + "/" + start_dt +  "/" + end_dt + "/auto/";
 
 	window.location.href = url;
 }
@@ -236,7 +236,7 @@ function lidar_auto_update()
 
     var station = $("#city-list-group .active").text();
 	var hostname = window.location.hostname;
-    var url = "http://" + hostname + ":8000/WindServer/lidar/" + product + "/" + filter + "/" + station + "/update/";
+    var url = "http://" + hostname + ":80/WindServer/lidar/" + product + "/" + filter + "/" + station + "/update/";
 
 	window.location.href = url;
 }

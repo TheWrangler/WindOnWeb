@@ -12,7 +12,7 @@ function load_tlogp(caption)
     var product = tlogp_caption_2_product(caption);
    
     var hostname = window.location.hostname;
-    var url = "http://" + hostname + ":8000/WindServer/tlogp/" + product + "/";
+    var url = "http://" + hostname + ":80/WindServer/tlogp/" + product + "/";
 
 	window.location.href = url;
 }
@@ -54,7 +54,7 @@ function tlogp_search(product)
     var station = $("#city-list-group .active").text();
     var dt = $("#datetimepick_cur").find("input").val(); 
 	var hostname = window.location.hostname;
-    var url = "http://" + hostname + ":8000/WindServer/tlogp/" + product + "/" + /*filter + "/" +*/ station + "/" + dt + "/";
+    var url = "http://" + hostname + ":80/WindServer/tlogp/" + product + "/" + /*filter + "/" +*/ station + "/" + dt + "/";
 
 	window.location.href = url;
 }
@@ -65,7 +65,7 @@ function tlogp_last_search(product,dt)
 
     var station = $("#city-list-group .active").text();
 	var hostname = window.location.hostname;
-    var url = "http://" + hostname + ":8000/WindServer/tlogp/" + product + "/" + /*filter + "/" +*/ station + "/" + dt + "/last/";
+    var url = "http://" + hostname + ":80/WindServer/tlogp/" + product + "/" + /*filter + "/" +*/ station + "/" + dt + "/last/";
 
 	window.location.href = url;
 }
@@ -76,7 +76,7 @@ function tlogp_next_search(product,dt)
 
     var station = $("#city-list-group .active").text();
 	var hostname = window.location.hostname;
-    var url = "http://" + hostname + ":8000/WindServer/tlogp/" + product + "/" + /*filter + "/" +*/ station + "/" + dt + "/next/";
+    var url = "http://" + hostname + ":80/WindServer/tlogp/" + product + "/" + /*filter + "/" +*/ station + "/" + dt + "/next/";
 
 	window.location.href = url;
 }
@@ -131,7 +131,7 @@ function tlogp_auto_refresh(bStart)
 
     var station = $("#city-list-group .active").text();
 	var hostname = window.location.hostname;
-    var url = "http://" + hostname + ":8000/WindServer/tlogp/" + product + "/" + /*filter + "/" +*/ station + "/" + start_dt +  "/" + end_dt + "/auto/";
+    var url = "http://" + hostname + ":80/WindServer/tlogp/" + product + "/" + /*filter + "/" +*/ station + "/" + start_dt +  "/" + end_dt + "/auto/";
 
 	window.location.href = url;
 }
@@ -146,7 +146,7 @@ function tlogp_auto_update()
 
     var station = $("#city-list-group .active").text();
 	var hostname = window.location.hostname;
-    var url = "http://" + hostname + ":8000/WindServer/tlogp/" + product + "/" + /*filter + "/" +*/ station + "/update/";
+    var url = "http://" + hostname + ":80/WindServer/tlogp/" + product + "/" + /*filter + "/" +*/ station + "/update/";
 
 	window.location.href = url;
 }
