@@ -25,7 +25,8 @@ SECRET_KEY = '@%(v-q)m4g6liyp@h7pz0zhqoira4%(qoefe-ggccur&6g+9#f'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.3.6']
+# ALLOWED_HOSTS = ['192.168.3.6']
+ALLOWED_HOSTS=[]
 
 
 # Application definition
@@ -119,4 +120,4 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = ('G:/WindOnWeb/WindOnWeb/static/',)
+STATICFILES_DIRS = ('g:/WindOnWeb/WindOnWeb/static/',)

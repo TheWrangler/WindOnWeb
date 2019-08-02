@@ -1,3 +1,8 @@
+function GetHostPort()
+{
+    return 80;
+}
+
 function DateTimeFormat(dt)
 { 
     var year = dt.getFullYear();       //年

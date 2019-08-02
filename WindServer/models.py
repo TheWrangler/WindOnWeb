@@ -81,15 +81,48 @@ class TlogP_Admin(admin.ModelAdmin):
     list_display = ('station','date_time','img_src')  
 
 #Lookup models
-# class WindDirect(models.Model):
-#     hei = models.IntegerField()
-#     station = models.CharField(max_length=50)
-#     date_time = models.DateTimeField()
-#     img_src = models.CharField(max_length=250)
+class WindRoseDaily(models.Model):
+    hei = models.IntegerField()
+    station = models.CharField(max_length=50)
+    date = models.DateField()
+    img_src = models.CharField(max_length=250)
 
-# class WindSpeed(models.Model):
-#     hei = models.IntegerField()
-#     station = models.CharField(max_length=50)
-#     date_time = models.DateTimeField()
-#     img_src = models.CharField(max_length=250)   
+class WindRoseDaily_Admin(admin.ModelAdmin):
+    list_display = ('hei','station','date','img_src')
+
+class WindRoseMonth(models.Model):
+    hei = models.IntegerField()
+    station = models.CharField(max_length=50)
+    date_from = models.DateField()
+    date_to = models.DateField()
+    img_src = models.CharField(max_length=250)
+
+class WindRoseMonth_Admin(admin.ModelAdmin):
+    list_display = ('hei','station','date_from','date_to','img_src')
+
+class WindCurveMonth(models.Model):
+    station = models.CharField(max_length=50)
+    date_from = models.DateField()
+    date_to = models.DateField()
+    img_src = models.CharField(max_length=250)   
     
+class WindCurveMonth_Admin(admin.ModelAdmin):
+    list_display = ('station','date_from','date_to','img_src')
+
+class TempMonth(models.Model):
+    station = models.CharField(max_length=50)
+    date_from = models.DateField()
+    date_to = models.DateField()
+    img_src = models.CharField(max_length=250)   
+
+class TempMonth_Admin(admin.ModelAdmin):
+    list_display = ('station','date_from','date_to','img_src')
+
+class HumidityMonth(models.Model):
+    station = models.CharField(max_length=50)
+    date_from = models.DateField()
+    date_to = models.DateField()
+    img_src = models.CharField(max_length=250)   
+
+class HumidityMonth_Admin(admin.ModelAdmin):
+    list_display = ('station','date_from','date_to','img_src')

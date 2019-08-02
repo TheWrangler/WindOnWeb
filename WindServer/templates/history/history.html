@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="/static/bootstrap-3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
+
+    <link rel="stylesheet" href ="/static/select2/css/select2.min.css"> 
+
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <script src="/static/jquery-3.4.1.min.js"></script>
+    <script src="/static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+    <script src="/static/moment-with-locales.js"></script>
+    <script src="/static/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+
+    <script src="/static/select2/js/select2.full.min.js"></script>
+    <script src="/static/select2/js/i18n/zh-CN.js"></script>
+
+    <script src="/static/js/utily.js"></script>
+    <script src="/static/js/comm.js"></script>
+    <script src="/static/js/nav.js"></script>
+    <script src="/static/js/history.js"></script>
+ 
+    <title>Seaglet激光测风雷达数据共享平台</title>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button class="navbar-toggle" data-toggle="collapse" data-target="#responsive-navbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <img src = "/static/img/seaglet.png" width="240" height = "65">
+                </a>
+            </div>
+        </div>
+
+        <div class="collapse navbar-collapse" id="responsive-navbar">
+            <p class="navbar-text"><b><font size="6">激光测风雷达数据共享平台</font></b></p>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="javascript:;" onclick = "nav_catalog('首页');return false">首页</a>
+                </li>
+                <li>
+                    <a href="javascript:;" onclick = "nav_catalog('激光雷达');return false">激光雷达</a>
+                </li>
+                <li>
+                    <a href="javascript:;" onclick = "nav_catalog('融合产品');return false">融合产品</a>
+                </li>
+                <li>
+                    <a href="javascript:;" onclick = "nav_catalog('T-logP图');return false">T-logP图</a>
+                </li>
+                <li class="active">
+                    <a href="javascript:;" onclick = "nav_catalog('统计查询');return false">统计查询</a>
+                </li>
+                <li>
+                    <a href="javascript:;" onclick = "nav_catalog('服务咨询');return false">服务咨询</a>
+                </li>
+                <li>
+                    <a href="javascript:;" onclick = "nav_catalog('关于我们');return false">关于我们</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="container  col-lg-2 col-md-2">
+        <div class='panel panel-default'>
+            <div class="panel-heading">气象查询要素</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label>风向玫瑰图</label>
+                    <div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="wind_rose_layer">高度：
+                            </label>
+                        </div>
+                        <div>
+                            <select class="select2" name="height-select" id="height-select">
+                                <option value="77">77m</option>
+                                <option value="181">181m</option>
+                                <option value="285">285m</option>
+                                <option value="389">389m</option>
+                                <option value="493">493m</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br/>
+                    <label>风速折线图</label>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" id="wind_curve_layer">各层风
+                        </label>
+                    </div>
+                    <br/>
+                    <label>温湿度统计</label>
+                    <div class="form-group">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="temp">各层温度
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="humidity">各层湿度
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class = "pane panel-default">
+            <div class = "panel panel-default">
+                <div class="panel-heading">日平均查询</div>
+                <div class="panel-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="datetimepick_cur">时间:</label>
+                            <div class="input-group date" id="datetimepick_cur">
+                                <input type="text" class="form-control" id="datetimepick_cur_input"/>
+                                <span class="input-group-addon"> 
+                                    <span class="glyphicon glyphicon-calendar"/>
+                                </span>
+                            </div>
+                        </div>
+                        <button type="button"  class="btn btn-default" onclick="day_average()">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"> 检索
+                        </button>
+                    </form>
+                </div>
+                <div class="panel-heading">月平均查询</div>
+                <div class="panel-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="datetimepick_start">起始时间:</label>
+                            <div class="input-group date" id="datetimepick_start">
+                                <input type="text" class="form-control" id="datetimepick_start_input"/>
+                                <span class="input-group-addon"> 
+                                    <span class="glyphicon glyphicon-calendar"/>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="datetimepick_end">结束时间:</label>
+                            <div class="input-group date" id="datetimepick_end">
+                                <input type="text" class="form-control" id="datetimepick_end_input"/>
+                                <span class="input-group-addon"> 
+                                    <span class="glyphicon glyphicon-calendar"/>
+                                </span>
+                            </div>
+                        </div>
+                        <button type="button"  class="btn btn-default" onclick="month_average()">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"> 检索
+                        </button>
+                    </form>
+                </div> 
+            </div>
+        </div>
+    </div>
+
+    <div class="container col-lg-8 col-md-8">
+        <center>
+            {% if product_sum == 0 %}
+            <div>
+                <br/>
+                <p>未检索到满足条件的数据，请调整检索条件再次重试!</p>
+            </div>
+            {% elif product_sum == 1 %}
+            <div>
+                <img src = "{{product_sum_0.first.img_src}}" width="80%"/>
+            </div>
+            {% elif product_sum == 2 %}
+            <div>
+                <img src = "{{product_sum_0.first.img_src}}" width="40%"/>   
+                <img src = "{{product_sum_1.first.img_src}}" width="40%"/>
+            </div>
+            {% elif product_sum == 3 %}
+            <div>
+                <div>
+                    <img src = "{{product_sum_0.first.img_src}}" width="40%"/>   
+                    <img src = "{{product_sum_1.first.img_src}}" width="40%"/>
+                </div>
+                <div>
+                    <img src = "{{product_sum_2.first.img_src}}" width="40%"/>
+                </div>
+            </div>
+            {% elif product_sum == 4 %}
+            <div>
+                <div>
+                    <img src = "{{product_sum_0.first.img_src}}" width="40%"/>   
+                    <img src = "{{product_sum_1.first.img_src}}" width="40%"/>
+                </div>
+                <div>
+                    <img src = "{{product_sum_2.first.img_src}}" width="40%"/>
+                    <img src = "{{product_sum_3.first.img_src}}" width="40%"/>
+                </div>
+            </div>
+            {% endif %}
+        </center>
+    </div>
+
+    <div class="container  col-lg-2 col-md-2">
+		<div class = "panel panel-default">
+            <div class="panel-heading">观测站点</div>
+            <div class="panel-body">
+                <div class="list-group" id="city-list-group">
+                    <li class="list-group-item active" id="全站">全站</li>
+                    <li class="list-group-item" id="翔安">翔安</li>
+                    <li class="list-group-item" id="湖里">湖里</li>
+                    <li class="list-group-item" id="集美">集美</li>
+                    <li class="list-group-item" id="海沧">海沧</li>
+                    <li class="list-group-item" id="同安">同安</li>
+                </div>
+            </div>  
+        </div>    
+    </div>
+</body>
+</html>
