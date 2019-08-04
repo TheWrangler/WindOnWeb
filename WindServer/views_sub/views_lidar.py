@@ -4,45 +4,30 @@ from WindServer.models import PPI,CAPPI,WINDTHI,RHI
 
 ###################################ppi views#######################################
 def ppi(request):
-    ppis = PPI.objects.order_by('-date_time')[:4]
+    ppis = PPI.objects.filter(station='全站').order_by('-date_time')[:4]
     ppis = ppis[::-1]
     return render(request, 'lidar/ppi.html',{'ppis':ppis})
 
 def ppi_update(request,ele,station):
-    if(station == '全站'):
-        ppis = PPI.objects.filter(ele=ele).order_by('-date_time')[:4]
-    else:
-        ppis = PPI.objects.filter(ele=ele,station=station).order_by('-date_time')[:4]
+    ppis = PPI.objects.filter(ele=ele,station=station).order_by('-date_time')[:4]
     ppis = ppis[::-1]
     return render(request, 'lidar/ppi.html',{'ppis':ppis})
 
 def ppi_search(request,ele,station,dt):
-    if(station == '全站'):
-        ppis = PPI.objects.filter(ele=ele,date_time__gte = dt).order_by('date_time')[:4]
-    else:
-        ppis = PPI.objects.filter(ele=ele,station=station,date_time__gte = dt).order_by('date_time')[:4]
+    ppis = PPI.objects.filter(ele=ele,station=station,date_time__gte = dt).order_by('date_time')[:4]
     return render(request, 'lidar/ppi.html',{'ppis':ppis})
 
 def ppi_last(request,ele,station,dt):
-    if station == '全站':
-        ppis = PPI.objects.filter(ele=ele,date_time__lt = dt).order_by('-date_time')[:4]
-    else:
-        ppis = PPI.objects.filter(ele=ele,station=station,date_time__lt = dt).order_by('-date_time')[:4]
+    ppis = PPI.objects.filter(ele=ele,station=station,date_time__lt = dt).order_by('-date_time')[:4]
     ppis = ppis[::-1]
     return render(request,'lidar/ppi.html',{'ppis':ppis})
 
 def ppi_next(request,ele,station,dt):
-    if station == '全站':
-        ppis = PPI.objects.filter(ele=ele,date_time__gt = dt).order_by('date_time')[:4]
-    else:
-        ppis = PPI.objects.filter(ele=ele,station=station,date_time__gt = dt).order_by('date_time')[:4]
+    ppis = PPI.objects.filter(ele=ele,station=station,date_time__gt = dt).order_by('date_time')[:4]
     return render(request,'lidar/ppi.html',{'ppis':ppis})
     
 def ppi_auto(request,ele,station,start_dt,end_dt):
-    if station == '全站':
-        ppis = PPI.objects.filter(ele=ele,date_time__gt=start_dt,date_time__lt=end_dt).order_by('date_time')[:1]
-    else:
-        ppis = PPI.objects.filter(ele=ele,station=station,date_time__gt=start_dt,date_time__lt=end_dt).order_by('date_time')[:1]
+    ppis = PPI.objects.filter(ele=ele,station=station,date_time__gt=start_dt,date_time__lt=end_dt).order_by('date_time')[:1]
     return render(request,'lidar/ppi.html',{'ppis':ppis})
 ###################################################################################
 
