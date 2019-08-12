@@ -112,45 +112,156 @@
 
     <div class="container col-lg-8 col-md-8">
         <center>
-            {% if rhis|length == 0 %}
-            <div>
-                <br/>
-                <p>未检索到满足条件的数据，请调整检索条件再次重试!</p>
-            </div>
+            {% if product_type == '全站' %}
+                {% if product_sum == 0 %}
+                <div>
+                    <br/>
+                    <p>未检索到满足条件的数据，请调整检索条件再次重试!</p>
+                </div>
+                {% elif product_sum == 1 %}
+                <div>
+                    <img src = "{{product_sum_0.first.img_src}}" width="80%"/>
+                    <br/>
+                    <span>{{product_sum_0.first.station}},{{product_sum_0.first.azi}},{{product_sum_0.first.date_time|date:"Y-m-d H:i:s"}}</span> 
+                </div>
+                {% elif product_sum == 2 %}
+                <div>
+                    <div class = 'left-img'>
+                        <img src = "{{product_sum_0.first.img_src}}" width="95%"/>
+                        <br/>
+                        <span>{{product_sum_0.first.station}},{{product_sum_0.first.azi}},{{product_sum_0.first.date_time|date:"Y-m-d H:i:s"}}</span> 
+                    </div>
+                    <div class = 'right-img'>
+                        <img src = "{{product_sum_1.first.img_src}}" width="95%"/>
+                        <br/>
+                        <span>{{product_sum_1.first.station}},{{product_sum_1.first.azi}},{{product_sum_1.first.date_time|date:"Y-m-d H:i:s"}}</span>
+                    </div>
+                </div>
+                {% elif product_sum == 3 %}
+                <div>
+                    <div>
+                        <div class = 'left-img'> 
+                            <img src = "{{product_sum_0.first.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_0.first.station}},{{product_sum_0.first.azi}},{{product_sum_0.first.date_time|date:"Y-m-d H:i:s"}}</span> 
+                        </div> 
+                        <div class = 'right-img'>  
+                            <img src = "{{product_sum_1.first.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_1.first.station}},{{product_sum_1.first.azi}},{{product_sum_1.first.date_time|date:"Y-m-d H:i:s"}}</span> 
+                        </div>
+                    </div>
+                    <div>
+                        <div class = 'left-img'>
+                            <img src = "{{product_sum_2.first.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_2.first.station}},{{product_sum_2.first.azi}},{{product_sum_2.first.date_time|date:"Y-m-d H:i:s"}}</span> 
+                        </div>
+                    </div>
+                </div>
+                {% elif product_sum == 4 %}
+                <div>
+                    <div>
+                        <div class = 'left-img'> 
+                            <img src = "{{product_sum_0.first.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_0.first.station}},{{product_sum_0.first.azi}},{{product_sum_0.first.date_time|date:"Y-m-d H:i:s"}}</span> 
+                        </div> 
+                        <div class = 'right-img'>  
+                            <img src = "{{product_sum_1.first.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_1.first.station}},{{product_sum_1.first.azi}},{{product_sum_1.first.date_time|date:"Y-m-d H:i:s"}}</span> 
+                        </div>
+                    </div>
+                    <div>
+                        <div class = 'left-img'>
+                            <img src = "{{product_sum_2.first.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_2.first.station}},{{product_sum_2.first.azi}},{{product_sum_2.first.date_time|date:"Y-m-d H:i:s"}}</span> 
+                        </div>
+                        <div class = 'right-img'>
+                            <img src = "{{product_sum_3.first.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_3.first.station}},{{product_sum_3.first.azi}},{{product_sum_3.first.date_time|date:"Y-m-d H:i:s"}}</span> 
+                        </div>
+                    </div>
+                </div>
+                {% elif product_sum == 5 %}
+                <div>
+                    <div>
+                        <div class = 'left-img'> 
+                            <img src = "{{product_sum_0.first.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_0.first.station}},{{product_sum_0.first.azi}},{{product_sum_0.first.date_time|date:"Y-m-d H:i:s"}}</span> 
+                        </div> 
+                        <div class = 'right-img'>  
+                            <img src = "{{product_sum_1.first.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_1.first.station}},{{product_sum_1.first.azi}},{{product_sum_1.first.date_time|date:"Y-m-d H:i:s"}}</span> 
+                        </div>
+                    </div>
+                    <div>
+                        <div class = 'left-img'>
+                            <img src = "{{product_sum_2.first.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_2.first.station}},{{product_sum_2.first.azi}},{{product_sum_2.first.date_time|date:"Y-m-d H:i:s"}}</span> 
+                        </div>
+                        <div class = 'right-img'>
+                            <img src = "{{product_sum_3.first.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_3.first.station}},{{product_sum_3.first.azi}},{{product_sum_3.first.date_time|date:"Y-m-d H:i:s"}}</span> 
+                        </div>
+                    </div>
+                    <div>
+                        <div class = 'left-img'>
+                            <img src = "{{product_sum_4.first.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_4.first.station}},{{product_sum_4.first.azi}},{{product_sum_4.first.date_time|date:"Y-m-d H:i:s"}}</span>   
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
             {% else %}
-            <div>
-                {% for rhi in rhis %}
-                {% if forloop.last %}
-                <img id="active_img" src = "{{rhi.img_src}}" width="80%"/>
-                {% endif %}
-                {% endfor %}
-            </div>
-            <br/>
-            <div class="btn-group" role="group" id="title-btn-group">
-                {% for rhi in rhis %}
+                {% if rhis|length == 0 %}
+                <div>
+                    <br/>
+                    <p>未检索到满足条件的数据，请调整检索条件再次重试!</p>
+                </div>
+                {% else %}
+                <div>
+                    {% for rhi in rhis %}
+                    {% if forloop.last %}
+                    <img id="active_img" src = "{{rhi.img_src}}" width="80%"/>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <br/>
+                <div class="btn-group" role="group" id="title-btn-group">
+                    {% for rhi in rhis %}
 
-                {% if forloop.first%}
-                <button type="button" class="btn btn-default" id="btn-last" onclick="lidar_last_search('rhi','{{ rhi.date_time|date:"Y-m-d H:i:s" }}')" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>
-                </button>
-                {% endif %}
-                
-                <button type="button" 
-                        class="btn btn-default {% if forloop.last %}active{% endif %}"
-                        onclick="update_img('{{rhi.img_src}}')"
-                        id = '{{ rhi.date_time|date:"Y-m-d H:i:s" }}'>
-                    <td>{{rhi.station}},{{rhi.azi}},{{ rhi.date_time|date:"Y-m-d H:i:s" }}</td>
-                </button>
+                    {% if forloop.first%}
+                    <button type="button" class="btn btn-default" id="btn-last" onclick="lidar_last_search('rhi','{{ rhi.date_time|date:"Y-m-d H:i:s" }}')" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>
+                    </button>
+                    {% endif %}
+                    
+                    <button type="button" 
+                            class="btn btn-default {% if forloop.last %}active{% endif %}"
+                            onclick="update_img('{{rhi.img_src}}')"
+                            id = '{{ rhi.date_time|date:"Y-m-d H:i:s" }}'>
+                        <td>{{rhi.station}},{{rhi.azi}},{{ rhi.date_time|date:"Y-m-d H:i:s" }}</td>
+                    </button>
 
-                {% if forloop.last %}
-                <button type="button" class="btn btn-default" id="btn-next" onclick="lidar_next_search('rhi','{{ rhi.date_time|date:"Y-m-d H:i:s" }}')" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
-                </button>
-                {% endif %}
+                    {% if forloop.last %}
+                    <button type="button" class="btn btn-default" id="btn-next" onclick="lidar_next_search('rhi','{{ rhi.date_time|date:"Y-m-d H:i:s" }}')" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+                    </button>
+                    {% endif %}
 
-                {% endfor %}
-            </div>
-            {% endif%}
+                    {% endfor %}
+                </div>
+                {% endif %}
+            {% endif %}    
         </center>
     </div>
 
@@ -159,12 +270,12 @@
             <div class="panel-heading">观测站点</div>
             <div class="panel-body">
                 <div class="list-group" id="city-list-group">
-                    <li class="list-group-item active" id="全站">全站</li>
-                    <li class="list-group-item" id="翔安">翔安</li>
-                    <li class="list-group-item" id="湖里">湖里</li>
-                    <li class="list-group-item" id="集美">集美</li>
-                    <li class="list-group-item" id="海沧">海沧</li>
-                    <li class="list-group-item" id="同安">同安</li>
+                    <li class="list-group-item active" id="全站" onclick="lidar_station('rhi','全站')">全站</li>
+                    <li class="list-group-item" id="翔安" onclick="lidar_station('rhi','翔安')">翔安</li>
+                    <li class="list-group-item" id="湖里" onclick="lidar_station('rhi','湖里')">湖里</li>
+                    <li class="list-group-item" id="集美" onclick="lidar_station('rhi','集美')">集美</li>
+                    <li class="list-group-item" id="海沧" onclick="lidar_station('rhi','海沧')">海沧</li>
+                    <li class="list-group-item" id="同安" onclick="lidar_station('rhi','同安')">同安</li>
                 </div>
             </div>  
         </div>  

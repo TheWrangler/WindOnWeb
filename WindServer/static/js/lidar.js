@@ -138,6 +138,16 @@ function SelectAzi(azi)
     }
 }
 
+function lidar_station(product,station)
+{
+    var filter = GetFilter(product);
+
+	var hostname = window.location.hostname;
+    var url = "http://" + hostname + ":80/WindServer/lidar/" + product + "/" + filter + "/" + station + "/";
+
+	window.location.href = url;
+}
+
 function lidar_search(product)
 {
     var filter = GetFilter(product);
@@ -250,6 +260,22 @@ function page_config(product)
     var filters = path.split("/");
     if(filters.length <= 5)
     {
+        var cur_dt = DateTimeFormat(new Date());
+        $("#datetimepick_cur_input").val(cur_dt);
+    }
+    else if(filters.length <= 7)
+    {
+        if(product == "ppi")
+            SelectEle(decodeURI(filters[4]));
+        else if(product == "cappi")
+            $("#height-select").val(filters[4]).trigger("change");
+        else if(product == "wind_thi")
+            SelectDirection(decodeURI(filters[4]));
+        else if(product == "rhi")
+            SelectAzi(decodeURI(filters[4]));
+
+        SelectCity(decodeURI(filters[5]));
+
         var cur_dt = DateTimeFormat(new Date());
         $("#datetimepick_cur_input").val(cur_dt);
     }

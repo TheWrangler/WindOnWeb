@@ -77,6 +77,16 @@ function SelectFusion(fusion)
     }
 }
 
+function fusion_station(product,station)
+{
+    var filter = GetFilter(product);
+
+	var hostname = window.location.hostname;
+    var url = "http://" + hostname + ":80/WindServer/fusion/" + product + "/" + filter + "/" + station + "/";
+
+	window.location.href = url;
+}
+
 function fusion_search(product)
 {
     var filter = GetFilter(product);
@@ -189,6 +199,14 @@ function page_config(product)
     var filters = path.split("/");
     if(filters.length <= 5)
     {
+        var cur_dt = DateTimeFormat(new Date());
+        $("#datetimepick_cur_input").val(cur_dt);
+    }
+    else if(filters.length <= 7)
+    {
+        SelectFusion(decodeURI(filters[4]));
+        SelectCity(decodeURI(filters[5]));
+
         var cur_dt = DateTimeFormat(new Date());
         $("#datetimepick_cur_input").val(cur_dt);
     }

@@ -34,24 +34,58 @@ def ppi_auto(request,ele,station,start_dt,end_dt):
 
 ###################################cappi views#######################################
 def cappi(request):
-    cappis = CAPPI.objects.order_by('-date_time')[:4]
-    cappis = cappis[::-1]
-    return render(request, 'lidar/cappi.html',{'cappis':cappis})
+    product_obj = {}
+    product_sum = 0
+    citys = ['翔安','湖里','集美','海沧','同安']
+    for city in citys:
+        cappi = CAPPI.objects.filter(hei=100,station=city).order_by('-date_time')[:1]
+        if len(cappi) != 0:
+            key = 'product_sum_%d' % product_sum
+            product_obj[key] = cappi
+            product_sum += 1
+
+    product_obj['product_sum'] = len(product_obj)
+    product_obj['product_type'] = '全站'
+    return render(request, 'lidar/cappi.html',product_obj)
 
 def cappi_update(request,hei,station):
+    product_obj = {}
+    product_sum = 0
+    citys = ['翔安','湖里','集美','海沧','同安']
     if(station == '全站'):
-        cappis = CAPPI.objects.filter(hei=hei).order_by('-date_time')[:4]
+        for city in citys:
+            cappi = CAPPI.objects.filter(hei=hei,station=city).order_by('-date_time')[:1]
+            if len(cappi) != 0:
+                key = 'product_sum_%d' % product_sum
+                product_obj[key] = cappi
+                product_sum += 1
+
+        product_obj['product_sum'] = len(product_obj)
+        product_obj['product_type'] = '全站'
+        return render(request, 'lidar/cappi.html',product_obj)
     else:
         cappis = CAPPI.objects.filter(hei=hei,station=station).order_by('-date_time')[:4]
-    cappis = cappis[::-1]
-    return render(request, 'lidar/cappi.html',{'cappis':cappis})
+        cappis = cappis[::-1]
+        return render(request, 'lidar/cappi.html',{'cappis':cappis,'product_type':'单站'})
 
 def cappi_search(request,hei,station,dt):
+    product_obj = {}
+    product_sum = 0
+    citys = ['翔安','湖里','集美','海沧','同安']
     if(station == '全站'):
-        cappis = CAPPI.objects.filter(hei=hei,date_time__gte = dt).order_by('date_time')[:4]
+        for city in citys:
+            cappi = CAPPI.objects.filter(hei=hei,station=city,date_time__gte = dt).order_by('date_time')[:1]
+            if len(cappi) != 0:
+                key = 'product_sum_%d' % product_sum
+                product_obj[key] = cappi
+                product_sum += 1
+
+        product_obj['product_sum'] = len(product_obj)
+        product_obj['product_type'] = '全站'
+        return render(request, 'lidar/cappi.html',product_obj)
     else:
         cappis = CAPPI.objects.filter(hei=hei,station=station,date_time__gte = dt).order_by('date_time')[:4]
-    return render(request, 'lidar/cappi.html',{'cappis':cappis})
+        return render(request, 'lidar/cappi.html',{'cappis':cappis,'product_type':'单站'})
 
 def cappi_last(request,hei,station,dt):
     if station == '全站':
@@ -78,24 +112,58 @@ def cappi_auto(request,hei,station,start_dt,end_dt):
 
 ###################################windthi views#######################################
 def windthi(request):
-    windthis = WINDTHI.objects.order_by('-date_time')[:4]
-    windthis = windthis[::-1]
-    return render(request, 'lidar/wind_thi.html',{'windthis':windthis})
+    product_obj = {}
+    product_sum = 0
+    citys = ['翔安','湖里','集美','海沧','同安']
+    for city in citys:
+        windthi = WINDTHI.objects.filter(direction='水平风',station=city).order_by('-date_time')[:1]
+        if len(windthi) != 0:
+            key = 'product_sum_%d' % product_sum
+            product_obj[key] = windthi
+            product_sum += 1
+
+    product_obj['product_sum'] = len(product_obj)
+    product_obj['product_type'] = '全站'
+    return render(request, 'lidar/wind_thi.html',product_obj)
 
 def windthi_update(request,direction,station):
+    product_obj = {}
+    product_sum = 0
+    citys = ['翔安','湖里','集美','海沧','同安']
     if(station == '全站'):
-        windthis = WINDTHI.objects.filter(direction=direction).order_by('-date_time')[:4]
+        for city in citys:
+            windthi = WINDTHI.objects.filter(direction=direction,station=city).order_by('-date_time')[:1]
+            if len(windthi) != 0:
+                key = 'product_sum_%d' % product_sum
+                product_obj[key] = windthi
+                product_sum += 1
+
+        product_obj['product_sum'] = len(product_obj)
+        product_obj['product_type'] = '全站'
+        return render(request, 'lidar/wind_thi.html',product_obj)
     else:
         windthis = WINDTHI.objects.filter(direction=direction,station=station).order_by('-date_time')[:4]
-    windthis = windthis[::-1]
-    return render(request, 'lidar/wind_thi.html',{'windthis':windthis})
+        windthis = windthis[::-1]
+        return render(request, 'lidar/wind_thi.html',{'windthis':windthis,'product_type':'单站'})
 
 def windthi_search(request,direction,station,dt):
+    product_obj = {}
+    product_sum = 0
+    citys = ['翔安','湖里','集美','海沧','同安']
     if(station == '全站'):
-        windthis = WINDTHI.objects.filter(direction=direction,date_time__gte = dt).order_by('date_time')[:4]
+        for city in citys:
+            windthi = WINDTHI.objects.filter(direction=direction,station=city,date_time__gte = dt).order_by('date_time')[:1]
+            if len(windthi) != 0:
+                key = 'product_sum_%d' % product_sum
+                product_obj[key] = windthi
+                product_sum += 1
+
+        product_obj['product_sum'] = len(product_obj)
+        product_obj['product_type'] = '全站'
+        return render(request, 'lidar/wind_thi.html',product_obj)
     else:
         windthis = WINDTHI.objects.filter(direction=direction,station=station,date_time__gte = dt).order_by('date_time')[:4]
-    return render(request, 'lidar/wind_thi.html',{'windthis':windthis})
+        return render(request, 'lidar/wind_thi.html',{'windthis':windthis,'product_type':'单站'})
 
 def windthi_last(request,direction,station,dt):
     if station == '全站':
@@ -122,24 +190,58 @@ def windthi_auto(request,direction,station,start_dt,end_dt):
 
 ###################################rhi views#######################################
 def rhi(request):
-    rhis = RHI.objects.order_by('-date_time')[:4]
-    rhis = rhis[::-1]
-    return render(request, 'lidar/rhi.html',{'rhis':rhis})
+    product_obj = {}
+    product_sum = 0
+    citys = ['翔安','湖里','集美','海沧','同安']
+    for city in citys:
+        rhi = RHI.objects.filter(azi='0',station=city).order_by('-date_time')[:1]
+        if len(rhi) != 0:
+            key = 'product_sum_%d' % product_sum
+            product_obj[key] = rhi
+            product_sum += 1
+
+    product_obj['product_sum'] = len(product_obj)
+    product_obj['product_type'] = '全站'
+    return render(request, 'lidar/rhi.html',product_obj)
 
 def rhi_update(request,azi,station):
+    product_obj = {}
+    product_sum = 0
+    citys = ['翔安','湖里','集美','海沧','同安']
     if(station == '全站'):
-        rhis = RHI.objects.filter(azi=azi).order_by('-date_time')[:4]
+        for city in citys:
+            rhi = RHI.objects.filter(azi=azi,station=city).order_by('-date_time')[:1]
+            if len(rhi) != 0:
+                key = 'product_sum_%d' % product_sum
+                product_obj[key] = rhi
+                product_sum += 1
+
+        product_obj['product_sum'] = len(product_obj)
+        product_obj['product_type'] = '全站'
+        return render(request, 'lidar/rhi.html',product_obj)
     else:
         rhis = RHI.objects.filter(azi=azi,station=station).order_by('-date_time')[:4]
     rhis = rhis[::-1]
-    return render(request, 'lidar/rhi.html',{'rhis':rhis})
+    return render(request, 'lidar/rhi.html',{'rhis':rhis,'product_type':'单站'})
 
 def rhi_search(request,azi,station,dt):
+    product_obj = {}
+    product_sum = 0
+    citys = ['翔安','湖里','集美','海沧','同安']
     if(station == '全站'):
-        rhis = RHI.objects.filter(azi=azi,date_time__gte = dt).order_by('date_time')[:4]
+        for city in citys:
+            rhi = RHI.objects.filter(azi=azi,station=city,date_time__gte = dt).order_by('date_time')[:1]
+            if len(rhi) != 0:
+                key = 'product_sum_%d' % product_sum
+                product_obj[key] = rhi
+                product_sum += 1
+
+        product_obj['product_sum'] = len(product_obj)
+        product_obj['product_type'] = '全站'
+        return render(request, 'lidar/rhi.html',product_obj)
     else:
         rhis = RHI.objects.filter(azi=azi,station=station,date_time__gte = dt).order_by('date_time')[:4]
-    return render(request, 'lidar/rhi.html',{'rhis':rhis})
+    return render(request, 'lidar/rhi.html',{'rhis':rhis,'product_type':'单站'})
 
 def rhi_last(request,azi,station,dt):
     if station == '全站':
