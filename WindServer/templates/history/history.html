@@ -15,7 +15,8 @@
     <script src="/static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
     <script src="/static/moment-with-locales.js"></script>
     <script src="/static/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
-
+    <script src="/static/bootstrap-datetimepicker/bootstrap-datetimepicker.zh-CN.js"></script>
+    
     <script src="/static/select2/js/select2.full.min.js"></script>
     <script src="/static/select2/js/i18n/zh-CN.js"></script>
 
@@ -163,41 +164,224 @@
 
     <div class="container col-lg-8 col-md-8">
         <center>
-            {% if product_sum == 0 %}
-            <div>
-                <br/>
-                <p>未检索到满足条件的数据，请调整检索条件再次重试!</p>
-            </div>
-            {% elif product_sum == 1 %}
-            <div>
-                <img src = "{{product_sum_0.first.img_src}}" width="80%"/>
-            </div>
-            {% elif product_sum == 2 %}
-            <div>
-                <img src = "{{product_sum_0.first.img_src}}" width="40%"/>   
-                <img src = "{{product_sum_1.first.img_src}}" width="40%"/>
-            </div>
-            {% elif product_sum == 3 %}
-            <div>
+            {% if product_type != '日平均' %}
+                {% if product_sum == 0 %}
                 <div>
-                    <img src = "{{product_sum_0.first.img_src}}" width="40%"/>   
-                    <img src = "{{product_sum_1.first.img_src}}" width="40%"/>
+                    <br/>
+                    <p>未检索到满足条件的数据，请调整检索条件再次重试!</p>
                 </div>
+                {% elif product_sum == 1 %}
                 <div>
-                    <img src = "{{product_sum_2.first.img_src}}" width="40%"/>
+                    <img src = "{{product_sum_0.first.img_src}}" width="80%"/>
+                    <br/>
+                    <span>{{product_sum_0.first.station}}</span> 
                 </div>
-            </div>
-            {% elif product_sum == 4 %}
-            <div>
+                {% elif product_sum == 2 %}
                 <div>
-                    <img src = "{{product_sum_0.first.img_src}}" width="40%"/>   
-                    <img src = "{{product_sum_1.first.img_src}}" width="40%"/>
+                    <div class = 'left-img'>
+                        <img src = "{{product_sum_0.first.img_src}}" width="95%"/>
+                        <br/>
+                        <span>{{product_sum_0.first.station}}</span> 
+                    </div>
+                    <div class = 'right-img'>
+                        <img src = "{{product_sum_1.first.img_src}}" width="95%"/>
+                        <br/>
+                        <span>{{product_sum_1.first.station}}</span>
+                    </div>
                 </div>
+                {% elif product_sum == 3 %}
                 <div>
-                    <img src = "{{product_sum_2.first.img_src}}" width="40%"/>
-                    <img src = "{{product_sum_3.first.img_src}}" width="40%"/>
+                    <div>
+                        <div class = 'left-img'> 
+                            <img src = "{{product_sum_0.first.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_0.first.station}}</span> 
+                        </div> 
+                        <div class = 'right-img'>  
+                            <img src = "{{product_sum_1.first.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_1.first.station}}</span> 
+                        </div>
+                    </div>
+                    <div>
+                        <div class = 'left-img'>
+                            <img src = "{{product_sum_2.first.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_2.first.station}}</span> 
+                        </div>
+                    </div>
                 </div>
-            </div>
+                {% elif product_sum == 4 %}
+                <div>
+                    <div>
+                        <div class = 'left-img'> 
+                            <img src = "{{product_sum_0.first.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_0.first.station}}</span> 
+                        </div> 
+                        <div class = 'right-img'>  
+                            <img src = "{{product_sum_1.first.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_1.first.station}}</span> 
+                        </div>
+                    </div>
+                    <div>
+                        <div class = 'left-img'>
+                            <img src = "{{product_sum_2.first.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_2.first.station}}</span> 
+                        </div>
+                        <div class = 'right-img'>
+                            <img src = "{{product_sum_3.first.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_3.first.station}}</span> 
+                        </div>
+                    </div>
+                </div>
+                {% elif product_sum == 5 %}
+                <div>
+                    <div>
+                        <div class = 'left-img'> 
+                            <img src = "{{product_sum_0.first.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_0.first.station}}</span> 
+                        </div> 
+                        <div class = 'right-img'>  
+                            <img src = "{{product_sum_1.first.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_1.first.station}}</span> 
+                        </div>
+                    </div>
+                    <div>
+                        <div class = 'left-img'>
+                            <img src = "{{product_sum_2.first.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_2.first.station}}</span> 
+                        </div>
+                        <div class = 'right-img'>
+                            <img src = "{{product_sum_3.first.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_3.first.station}}</span> 
+                        </div>
+                    </div>
+                    <div>
+                        <div class = 'left-img'>
+                            <img src = "{{product_sum_4.first.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_4.first.station}}</span>   
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% else %}
+                {% if product_sum == 0 %}
+                <div>
+                    <br/>
+                    <p>未检索到满足条件的数据，请调整检索条件再次重试!</p>
+                </div>
+                {% elif product_sum == 1 %}
+                <div>
+                    <img src = "{{product_sum_0.img_src}}" width="80%"/>
+                    <br/>
+                    <span>{{product_sum_0.station}}</span> 
+                </div>
+                {% elif product_sum == 2 %}
+                <div>
+                    <div class = 'left-img'>
+                        <img src = "{{product_sum_0.img_src}}" width="95%"/>
+                        <br/>
+                        <span>{{product_sum_0.station}}</span> 
+                    </div>
+                    <div class = 'right-img'>
+                        <img src = "{{product_sum_1.img_src}}" width="95%"/>
+                        <br/>
+                        <span>{{product_sum_1.station}}</span>
+                    </div>
+                </div>
+                {% elif product_sum == 3 %}
+                <div>
+                    <div>
+                        <div class = 'left-img'> 
+                            <img src = "{{product_sum_0.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_0.station}}</span> 
+                        </div> 
+                        <div class = 'right-img'>  
+                            <img src = "{{product_sum_1.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_1.station}}</span> 
+                        </div>
+                    </div>
+                    <div>
+                        <div class = 'left-img'>
+                            <img src = "{{product_sum_2.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_2.station}}</span> 
+                        </div>
+                    </div>
+                </div>
+                {% elif product_sum == 4 %}
+                <div>
+                    <div>
+                        <div class = 'left-img'> 
+                            <img src = "{{product_sum_0.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_0.station}}</span> 
+                        </div> 
+                        <div class = 'right-img'>  
+                            <img src = "{{product_sum_1.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_1.station}}</span> 
+                        </div>
+                    </div>
+                    <div>
+                        <div class = 'left-img'>
+                            <img src = "{{product_sum_2.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_2.station}}</span> 
+                        </div>
+                        <div class = 'right-img'>
+                            <img src = "{{product_sum_3.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_3.station}}</span> 
+                        </div>
+                    </div>
+                </div>
+                {% elif product_sum == 5 %}
+                <div>
+                    <div>
+                        <div class = 'left-img'> 
+                            <img src = "{{product_sum_0.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_0.station}}</span> 
+                        </div> 
+                        <div class = 'right-img'>  
+                            <img src = "{{product_sum_1.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_1.station}}</span> 
+                        </div>
+                    </div>
+                    <div>
+                        <div class = 'left-img'>
+                            <img src = "{{product_sum_2.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_2.station}}</span> 
+                        </div>
+                        <div class = 'right-img'>
+                            <img src = "{{product_sum_3.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_3.station}}</span> 
+                        </div>
+                    </div>
+                    <div>
+                        <div class = 'left-img'>
+                            <img src = "{{product_sum_4.img_src}}" width="95%">
+                            <br/>
+                            <span>{{product_sum_4.station}}</span>   
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
             {% endif %}
         </center>
     </div>

@@ -1,0 +1,15 @@
+{
+    "python.pythonPath": "D:\\Python\\Python37\\python.exe",
+    "sqltools.connections": [
+        {
+            "database": ".\\db.sqlite3",
+            "dialect": "SQLite",
+            "name": "WindOnWeb_db"
+        }
+    ],
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "python.linting.flake8Enabled": false,
+    "python.linting.pylamaEnabled": false,
+    "sqltools.useNodeRuntime": true
+}

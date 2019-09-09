@@ -17,3 +17,14 @@ function update_img(imgSrc)
     var element = document.getElementById('active_img');
     element.src = imgSrc;
 }
+
+function GetCurDateTime()
+{
+    var dt = $("#datetime-select").val();
+    return dt;
+}
+
+function SelectCurDateTime(dt)
+{
+    $("#datetime-select").val(dt).trigger("change");
+}

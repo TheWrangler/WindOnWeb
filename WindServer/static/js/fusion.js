@@ -31,19 +31,22 @@ $(function(){
         $(this).addClass("active").siblings().removeClass("active");
     });
 
-    $("#datetimepick_cur").datetimepicker({
-        format:'YYYY-MM-DD hh:mm',
-        locale:moment.locale('zh-cn')
-    });
-
     $("#datetimepick_start").datetimepicker({
-        format:'YYYY-MM-DD hh:mm',
-        locale:moment.locale('zh-cn')
+        format:'yyyy-mm-dd hh:ii',
+        language: 'zh-CN',
+        autoclose:1
     });
 
     $("#datetimepick_end").datetimepicker({
-        format:'YYYY-MM-DD hh:mm',
-        locale:moment.locale('zh-cn')
+        format:'yyyy-mm-dd hh:ii',
+        language: 'zh-CN',
+        autoclose:1
+    });
+
+    $("#datetime-select").select2({
+        width:"100%",
+	    placeholder:"请选择时间",
+	    language:"zh-CN"
     });
 
     $('#fusion-list-group .list-group-item').click(function() {
@@ -91,7 +94,7 @@ function fusion_search(product)
 {
     var filter = GetFilter(product);
     var station = $("#city-list-group .active").text();
-    var dt = $("#datetimepick_cur").find("input").val(); 
+    var dt = GetCurDateTime();
 	var hostname = window.location.hostname;
     var url = "http://" + hostname + ":80/WindServer/fusion/" + product + "/" + filter + "/" + station + "/" + dt + "/";
 
@@ -200,7 +203,7 @@ function page_config(product)
     if(filters.length <= 5)
     {
         var cur_dt = DateTimeFormat(new Date());
-        $("#datetimepick_cur_input").val(cur_dt);
+        //$("#datetimepick_cur_input").val(cur_dt);
     }
     else if(filters.length <= 7)
     {
@@ -208,7 +211,7 @@ function page_config(product)
         SelectCity(decodeURI(filters[5]));
 
         var cur_dt = DateTimeFormat(new Date());
-        $("#datetimepick_cur_input").val(cur_dt);
+        //$("#datetimepick_cur_input").val(cur_dt);
     }
     else if(filters.length <= 9)
     {
@@ -220,12 +223,12 @@ function page_config(product)
             gb_timer = setTimeout(fusion_auto_update,6000);
 
             var cur_dt = DateTimeFormat(new Date());
-            $("#datetimepick_cur_input").val(cur_dt);
+            //$("#datetimepick_cur_input").val(cur_dt);
         }  
         else 
         {
             var cur_dt = decodeURI(filters[6]);
-            $("#datetimepick_cur_input").val(cur_dt);
+            //$("#datetimepick_cur_input").val(cur_dt);
         }
     }
     else
@@ -238,7 +241,7 @@ function page_config(product)
         var end_dt = decodeURI(filters[7]);
         $("#datetimepick_end_input").val(end_dt);
 
-        $("#datetimepick_cur_input").val(start_dt);
+        //$("#datetimepick_cur_input").val(start_dt);
 
 		gb_timer = setTimeout(fusion_auto_refresh,3000);
     }

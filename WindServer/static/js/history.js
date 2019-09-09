@@ -10,18 +10,27 @@ $(function(){
     });
 
     $("#datetimepick_cur").datetimepicker({
-        format:'YYYY-MM-DD',
-        locale:moment.locale('zh-cn')
+        format:'yyyy-mm-dd',
+        language: 'zh-CN',
+        autoclose:1,
+        startView: 2,
+        minView:2
     });
 
     $("#datetimepick_start").datetimepicker({
-        format:'YYYY-MM',
-        locale:moment.locale('zh-cn')
+        format:'yyyy-mm',
+        language: 'zh-CN',
+        autoclose:1,
+        startView: 3,
+        minView:3
     });
 
     $("#datetimepick_end").datetimepicker({
-        format:'YYYY-MM',
-        locale:moment.locale('zh-cn')
+        format:'yyyy-mm',
+        language: 'zh-CN',
+        autoclose:1,
+        startView: 3,
+        minView:3
     });
 
     $(document).ready(function(){

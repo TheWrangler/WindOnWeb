@@ -15,6 +15,7 @@
     <script src="/static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
     <script src="/static/moment-with-locales.js"></script>
     <script src="/static/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+    <script src="/static/bootstrap-datetimepicker/bootstrap-datetimepicker.zh-CN.js"></script>
 
     <script src="/static/select2/js/select2.full.min.js"></script>
     <script src="/static/select2/js/i18n/zh-CN.js"></script>
@@ -75,10 +76,10 @@
             <div class="panel-heading">产品选择</div>
             <div class="panel-body">
                 <div class="list-group" id="product-list-group">
-                    <li class="list-group-item active" onclick="('激光雷达')">激光雷达</li>
-                    <li class="list-group-item" onclick="('风廓线雷达')">风廓线雷达</li>
-                    <li class="list-group-item" onclick="('微波辐射计')">微波辐射计</li>
-                    <li class="list-group-item" onclick="('地面风速计')">地面风速计</li>
+                    <li class="list-group-item active" onclick="load_index('激光雷达')">激光雷达</li>
+                    <li class="list-group-item">风廓线雷达</li>
+                    <li class="list-group-item">微波辐射计</li>
+                    <li class="list-group-item">地面风速计</li>
                 </div>
             </div>  
         </div>  
@@ -87,12 +88,13 @@
             <div class="panel-body">
                 <form>
                     <div class="form-group">
-                        <label for="datetimepick_cur">时间:</label>
-                        <div class="input-group date" id="datetimepick_cur">
-                            <input type="text" class="form-control" id="datetimepick_cur_input"/>
-                            <span class="input-group-addon"> 
-                                <span class="glyphicon glyphicon-calendar"/>
-                            </span>
+                        <label for="height-select">时间:</label>
+                        <div>
+                            <select class="select2" name="datetime-select" id="datetime-select">
+                                {% for tlabel in tlabels %}
+                                <option value='{{ tlabel.date_time|date:"Y-m-d H:i:s" }}'>{{ tlabel.date_time|date:"Y-m-d H:i:s" }}</option>
+                                {% endfor %}
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
@@ -105,10 +107,10 @@
                             </select>
                         </div>
                     </div>
-                    <button type="button"  class="btn btn-default" onclick="lidar_search()">
+                    <button type="button"  class="btn btn-default" onclick="index_search()">
                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 检索
                     </button>
-                    <button type="button"  class="btn btn-default" onclick="lidar_auto_update()">
+                    <button type="button"  class="btn btn-default" onclick="index_auto_update()">
                         <span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span> 实时
                     </button>
                 </form>
@@ -136,7 +138,7 @@
                 {% for lidar in lidars %}
 
                 {% if forloop.first%}
-                <button type="button" class="btn btn-default" id="btn-last" onclick="lidar_last_search('{{ lidar.date_time|date:"Y-m-d H:i:s" }}')" aria-label="Left Align">
+                <button type="button" class="btn btn-default" id="btn-last" onclick="index_last_search('{{ lidar.date_time|date:"Y-m-d H:i:s" }}')" aria-label="Left Align">
                     <span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>
                 </button>
                 {% endif %}
@@ -149,7 +151,7 @@
 				</button>
 
                 {% if forloop.last %}
-                <button type="button" class="btn btn-default" id="btn-next" onclick="lidar_next_search('{{ lidar.date_time|date:"Y-m-d H:i:s" }}')" aria-label="Left Align">
+                <button type="button" class="btn btn-default" id="btn-next" onclick="index_next_search('{{ lidar.date_time|date:"Y-m-d H:i:s" }}')" aria-label="Left Align">
                     <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
                 </button>
                 {% endif %}
@@ -165,7 +167,7 @@
             <div class="panel-heading">观测站点</div>
             <div class="panel-body">
                 <div class="list-group" id="city-list-group">
-                    <li class="list-group-item active" id="全站">全站</li>
+                    <li class="list-group-item active" id="全站" onclick="index_station('lidars','全站')">全站</li>
                     <li class="list-group-item" id="翔安">翔安</li>
                     <li class="list-group-item" id="湖里">湖里</li>
                     <li class="list-group-item" id="集美">集美</li>
@@ -204,7 +206,7 @@
                             </span>
                         </div>
                     </div>
-                    <button type="button"  class="btn btn-default" onclick="lidar_auto_refresh('True')">
+                    <button type="button"  class="btn btn-default" onclick="index_auto_refresh('True')">
                         <span class="glyphicon glyphicon-hourglass" aria-hidden="true"> 浏览
                     </button>
                 </form>

@@ -15,10 +15,13 @@ def windrose_daily(request,products,station,hei,dt):
         windrose = WindRoseDaily.objects.filter(station=station,hei=hei,date=dt)
     
     if len(windrose) != 0:
-        key = 'product_sum_%d' % product_sum
-        product_obj[key] = windrose
+        for wind in windrose:
+            key = 'product_sum_%d' % product_sum
+            product_obj[key] = wind
+            product_sum += 1
 
     product_obj['product_sum'] = len(product_obj)
+    product_obj['product_type'] = '日平均'
     return render(request, 'history/history.html',product_obj)
 
 def history_month(request,products,station,from_dt,to_dt):
@@ -56,6 +59,7 @@ def history_month(request,products,station,from_dt,to_dt):
             product_sum+=1
 
     product_obj['product_sum'] = len(product_obj)
+    product_obj['product_type'] = '月平均'
     return  render(request, 'history/history.html',product_obj)
 
 def history_month_hei(request,products,station,hei,from_dt,to_dt):
@@ -104,4 +108,5 @@ def history_month_hei(request,products,station,hei,from_dt,to_dt):
             product_sum+=1
 
     product_obj['product_sum'] = len(product_obj)
+    product_obj['product_type'] = '月平均'
     return  render(request, 'history/history.html',product_obj)

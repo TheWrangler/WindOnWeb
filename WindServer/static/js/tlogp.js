@@ -26,19 +26,22 @@ $(function(){
         $(this).addClass("active").siblings().removeClass("active");
     });
 
-    $("#datetimepick_cur").datetimepicker({
-        format:'YYYY-MM-DD hh:mm',
-        locale:moment.locale('zh-cn')
-    });
-
     $("#datetimepick_start").datetimepicker({
-        format:'YYYY-MM-DD hh:mm',
-        locale:moment.locale('zh-cn')
+        format:'yyyy-mm-dd hh:ii',
+        language: 'zh-CN',
+        autoclose:1
     });
 
     $("#datetimepick_end").datetimepicker({
-        format:'YYYY-MM-DD hh:mm',
-        locale:moment.locale('zh-cn')
+        format:'yyyy-mm-dd hh:ii',
+        language: 'zh-CN',
+        autoclose:1
+    });
+
+    $("#datetime-select").select2({
+        width:"100%",
+	    placeholder:"请选择时间",
+	    language:"zh-CN"
     });
     
     $(document).ready(function(){
@@ -60,7 +63,7 @@ function tlogp_search(product)
 {
     //var filter = GetFilter(product);
     var station = $("#city-list-group .active").text();
-    var dt = $("#datetimepick_cur").find("input").val(); 
+    var dt = GetCurDateTime(); 
 	var hostname = window.location.hostname;
     var url = "http://" + hostname + ":80/WindServer/tlogp/" + product + "/" + /*filter + "/" +*/ station + "/" + dt + "/";
 
@@ -169,14 +172,14 @@ function page_config(product)
     if(filters.length <= 5)
     {
         var cur_dt = DateTimeFormat(new Date());
-        $("#datetimepick_cur_input").val(cur_dt);
+        //$("#datetimepick_cur_input").val(cur_dt);
     }
     else if(filters.length <= 6)
     {
         SelectCity(decodeURI(filters[4]));
 
         var cur_dt = DateTimeFormat(new Date());
-        $("#datetimepick_cur_input").val(cur_dt);
+        //$("#datetimepick_cur_input").val(cur_dt);
     }
     else if(filters.length <= 8)
     {
@@ -187,12 +190,12 @@ function page_config(product)
             gb_timer = setTimeout(tlogp_auto_update,6000);
 
             var cur_dt = DateTimeFormat(new Date());
-            $("#datetimepick_cur_input").val(cur_dt);
+            //$("#datetimepick_cur_input").val(cur_dt);
         }  
         else 
         {
             var cur_dt = decodeURI(filters[5]);
-            $("#datetimepick_cur_input").val(cur_dt);
+            //$("#datetimepick_cur_input").val(cur_dt);
         }
     }
     else
@@ -204,7 +207,7 @@ function page_config(product)
         var end_dt = decodeURI(filters[6]);
         $("#datetimepick_end_input").val(end_dt);
 
-        $("#datetimepick_cur_input").val(start_dt);
+        //$("#datetimepick_cur_input").val(start_dt);
 
 		gb_timer = setTimeout(tlogp_auto_refresh,3000);
     }

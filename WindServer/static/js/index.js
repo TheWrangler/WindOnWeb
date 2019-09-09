@@ -9,19 +9,16 @@ $(function(){
         $(this).addClass("active").siblings().removeClass("active");
     });
 
-    $("#datetimepick_cur").datetimepicker({
-        format:'YYYY-MM-DD hh:mm',
-        locale:moment.locale('zh-cn')
-    });
-
-    $("#datetimepick_start").datetimepicker({
-        format:'YYYY-MM-DD hh:mm',
-        locale:moment.locale('zh-cn')
+    $("#datetimepick_start").datetimepicker({//选择年月日
+        format:'yyyy-mm-dd hh:ii',
+        language: 'zh-CN',
+        autoclose:1
     });
 
     $("#datetimepick_end").datetimepicker({
-        format:'YYYY-MM-DD hh:mm',
-        locale:moment.locale('zh-cn')
+        format:'yyyy-mm-dd hh:ii',
+        language: 'zh-CN',
+        autoclose:1
     });
 
     $("#height-select").select2({
@@ -30,15 +27,51 @@ $(function(){
 	    language:"zh-CN"
     });
 
+    $("#datetime-select").select2({
+        width:"100%",
+	    placeholder:"请选择时间",
+	    language:"zh-CN"
+    });
+
     $(document).ready(function(){
         page_config();
     });
 });
 
-function lidar_search()
+function GetFilter(product)
+{
+    var filter;
+    if(product == "lidars")
+    {
+        filter = $("#height-select").val();
+    }
+    
+    return filter;
+}
+
+function load_index(caption)
+{
+    //var product = lidar_caption_2_product(caption);
+
+    var hostname = window.location.hostname;
+    var url = "http://" + hostname + ":80/WindServer/index/lidars/";
+
+	window.location.href = url;
+}
+
+function index_station(product,station)
+{
+    var filter = GetFilter(product);
+	var hostname = window.location.hostname;
+    var url = "http://" + hostname + ":80/WindServer/index/" + product + "/" + filter + "/" + station + "/";
+
+    window.location.href = url;
+}
+
+function index_search()
 {
     var hei = $("#height-select").val(); 
-    var dt = $("#datetimepick_cur").find("input").val(); 
+    var dt = GetCurDateTime();
     var station = $("#city-list-group .active").text();
 	var hostname = window.location.hostname;
     var url = "http://" + hostname + ":80/WindServer/index/lidars/" + hei + "/" + station + "/" + dt +  "/";
@@ -46,7 +79,7 @@ function lidar_search()
 	window.location.href = url;
 }
 
-function lidar_last_search(dt)
+function index_last_search(dt)
 {
     var hei = $("#height-select").val();  
     var station = $("#city-list-group .active").text();
@@ -56,7 +89,7 @@ function lidar_last_search(dt)
 	window.location.href = url;
 }
 
-function lidar_next_search(dt)
+function index_next_search(dt)
 {
     var hei = $("#height-select").val();  
     var station = $("#city-list-group .active").text();
@@ -66,7 +99,7 @@ function lidar_next_search(dt)
 	window.location.href = url;
 }
 
-function lidar_auto_refresh(bStart)
+function index_auto_refresh(bStart)
 {
     var hei = $("#height-select").val();
     var start_dt; 
@@ -116,7 +149,7 @@ function lidar_auto_refresh(bStart)
 	window.location.href = url;
 }
 
-function lidar_auto_update()
+function index_auto_update()
 {
     var hei = $("#height-select").val();  
     var station = $("#city-list-group .active").text();
@@ -133,7 +166,7 @@ function page_config()
     if(filters.length <= 5)
     {
         var cur_dt = DateTimeFormat(new Date());
-        $("#datetimepick_cur_input").val(cur_dt);
+        //$("#datetimepick_cur_input").val(cur_dt);
     }
     else if(filters.length <= 9)
     {
@@ -142,14 +175,14 @@ function page_config()
 
         if(filters[6] == "update")
         {
-            gb_timer = setTimeout(lidar_auto_update,6000);
+            gb_timer = setTimeout(index_auto_update,6000);
             var cur_dt = DateTimeFormat(new Date());
-            $("#datetimepick_cur_input").val(cur_dt);
+            //$("#datetimepick_cur_input").val(cur_dt);
         }
         else 
         {
             var cur_dt = decodeURI(filters[6]);
-            $("#datetimepick_cur_input").val(cur_dt);
+            //$("#datetimepick_cur_input").val(cur_dt);
         }
     }
     else
@@ -162,8 +195,8 @@ function page_config()
         var end_dt = decodeURI(filters[7]);
         $("#datetimepick_end_input").val(end_dt);
 
-        $("#datetimepick_cur_input").val(start_dt);
+        //$("#datetimepick_cur_input").val(start_dt);
 
-		gb_timer = setTimeout(lidar_auto_refresh,3000);
+		gb_timer = setTimeout(index_auto_refresh,3000);
     }
 }

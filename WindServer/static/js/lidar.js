@@ -32,19 +32,16 @@ $(function(){
         $(this).addClass("active").siblings().removeClass("active");
     });
 
-    $("#datetimepick_cur").datetimepicker({
-        format:'YYYY-MM-DD hh:mm',
-        locale:moment.locale('zh-cn')
-    });
-
     $("#datetimepick_start").datetimepicker({
-        format:'YYYY-MM-DD hh:mm',
-        locale:moment.locale('zh-cn')
+        format:'yyyy-mm-dd hh:ii',
+        language: 'zh-CN',
+        autoclose:1
     });
 
     $("#datetimepick_end").datetimepicker({
-        format:'YYYY-MM-DD hh:mm',
-        locale:moment.locale('zh-cn')
+        format:'yyyy-mm-dd hh:ii',
+        language: 'zh-CN',
+        autoclose:1
     });
 
 	$('#ele-list-group .list-group-item').click(function() {
@@ -63,6 +60,12 @@ $(function(){
 	
 	$('#azi-list-group .list-group-item').click(function(){
 		$(this).addClass("active").siblings().removeClass("active");
+    });
+
+    $("#datetime-select").select2({
+        width:"100%",
+	    placeholder:"请选择时间",
+	    language:"zh-CN"
     });
     
     $(document).ready(function(){
@@ -141,22 +144,20 @@ function SelectAzi(azi)
 function lidar_station(product,station)
 {
     var filter = GetFilter(product);
-
 	var hostname = window.location.hostname;
     var url = "http://" + hostname + ":80/WindServer/lidar/" + product + "/" + filter + "/" + station + "/";
 
-	window.location.href = url;
+    window.location.href = url;
 }
 
 function lidar_search(product)
 {
     var filter = GetFilter(product);
     var station = $("#city-list-group .active").text();
-    var dt = $("#datetimepick_cur").find("input").val(); 
-	var hostname = window.location.hostname;
+    var dt = GetCurDateTime(); 
+    var hostname = window.location.hostname;
     var url = "http://" + hostname + ":80/WindServer/lidar/" + product + "/" + filter + "/" + station + "/" + dt + "/";
-
-	window.location.href = url;
+    window.location.href = url;
 }
 
 function lidar_last_search(product,dt)
@@ -261,7 +262,7 @@ function page_config(product)
     if(filters.length <= 5)
     {
         var cur_dt = DateTimeFormat(new Date());
-        $("#datetimepick_cur_input").val(cur_dt);
+        //$("#datetimepick_cur_input").val(cur_dt);
     }
     else if(filters.length <= 7)
     {
@@ -277,7 +278,7 @@ function page_config(product)
         SelectCity(decodeURI(filters[5]));
 
         var cur_dt = DateTimeFormat(new Date());
-        $("#datetimepick_cur_input").val(cur_dt);
+        //$("#datetimepick_cur_input").val(cur_dt);
     }
     else if(filters.length <= 9)
     {
@@ -297,12 +298,12 @@ function page_config(product)
             gb_timer = setTimeout(lidar_auto_update,6000);
 
             var cur_dt = DateTimeFormat(new Date());
-            $("#datetimepick_cur_input").val(cur_dt);
+            //$("#datetimepick_cur_input").val(cur_dt);
         }  
         else 
         {
             var cur_dt = decodeURI(filters[6]);
-            $("#datetimepick_cur_input").val(cur_dt);
+            //$("#datetimepick_cur_input").val(cur_dt);
         }
     }
     else
@@ -323,7 +324,7 @@ function page_config(product)
         var end_dt = decodeURI(filters[7]);
         $("#datetimepick_end_input").val(end_dt);
 
-        $("#datetimepick_cur_input").val(start_dt);
+        //$("#datetimepick_cur_input").val(start_dt);
 
 		gb_timer = setTimeout(lidar_auto_refresh,3000);
     }
