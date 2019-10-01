@@ -95,6 +95,11 @@ function fusion_search(product)
     var filter = GetFilter(product);
     var station = $("#city-list-group .active").text();
     var dt = GetCurDateTime();
+    if(dt == null)
+    {
+        alert("没有符合当前搜索条件的数据！");
+        return;
+    }
 	var hostname = window.location.hostname;
     var url = "http://" + hostname + ":80/WindServer/fusion/" + product + "/" + filter + "/" + station + "/" + dt + "/";
 

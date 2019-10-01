@@ -72,6 +72,11 @@ function index_search()
 {
     var hei = $("#height-select").val(); 
     var dt = GetCurDateTime();
+    if(dt == null)
+    {
+        alert("没有符合当前搜索条件的数据！");
+        return;
+    }
     var station = $("#city-list-group .active").text();
 	var hostname = window.location.hostname;
     var url = "http://" + hostname + ":80/WindServer/index/lidars/" + hei + "/" + station + "/" + dt +  "/";
